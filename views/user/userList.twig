@@ -1,0 +1,23 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h3>{{ title }}</h3>
+
+    <table class="table table-striped">
+        {% for user in users %}
+            <tr>
+                <td width="20px">
+                    <a href="{{ user.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                </td>
+                <td>
+                    {{ user.name }}
+                </td>
+                <td>
+                    {{ user.email }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
