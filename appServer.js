@@ -58,10 +58,15 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/api/user', userRouter);
 app.use('/event', eventRouter);
+app.use('/api/event', eventRouter);
 app.use('/habit', habitRouter);
+app.use('/api/habit', habitRouter);
 app.use('/topic', topicRouter);
+app.use('/api/topic', topicRouter);
 app.use('/todo', todoRouter);
+app.use('/api/todo', todoRouter);
 app.use('/entity', entityRouter);
+app.use('/api/entity', entityRouter);
 // -------------------------------------------------
 
 // catch 404 and forward to error handler
