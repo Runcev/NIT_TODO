@@ -9,8 +9,11 @@ exports.userList = function (req, res) {
                 return next(err);
             }
 
+            //console.log(JSON.stringify(users));
+
+
             if (req.baseUrl.match(/api/)) {
-                res.send({ users: 'Users list' });
+                res.send({ users: JSON.stringify(users) });
             } else {
                 res.render('user/userList', {title: 'Users list', users: users});
             }
