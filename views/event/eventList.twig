@@ -1,0 +1,35 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h3>{{ title }}</h3>
+
+    <table class="table table-striped">
+        {% for event in events %}
+            <tr>
+                <td width="20px">
+                    <a href="{{ event.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                </td>
+                <td>
+                    {{ event.name }}
+                </td>
+                <td>
+                    {{ event.date|date('d.m.Y') }}
+                </td>
+                <td>
+                    {{ event.timeStart }}
+                </td>
+                <td>
+                    {{ event.timeEnd }}
+                </td>
+                <td>
+                    {{ event.place }}
+                </td>
+                <td>
+                    {{ event.about }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
