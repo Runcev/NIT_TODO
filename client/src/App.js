@@ -4,11 +4,6 @@ import UserList from "./components/UserList";
 
 function App() {
 
-    const [users, setUsers] = useState("");
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [responseToPost, setResponseToPost] = useState("");
-
     const callApi = async () => {
         const res = await fetch('/api/user');
         const body = await res.json();
@@ -16,22 +11,7 @@ function App() {
         return body;
     };
 
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const response = await fetch('/api/user/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name: name, email: email})
-        });
-        const body = await response.text();
-        setResponseToPost(body);
-        setName('');
-        setEmail('');
-    };
-
-    useEffect(() => {
+    const setUsersList = () => {
         callApi()
             .then(res => {
 
@@ -49,6 +29,50 @@ function App() {
 
             })
             .catch(err => console.log(err));
+    };
+
+    const [users, setUsers] = useState(setUsersList);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [responseToPost, setResponseToPost] = useState("");
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const response = await fetch('/api/user/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: name, email: email})
+        });
+        const body = await response.text();
+        setResponseToPost(body);
+        setName('');
+        setEmail('');
+
+        setUsersList();
+    };
+
+    useEffect(() => {
+        /*
+        callApi()
+            .then(res => {
+
+                let users = JSON.parse(res.users);
+
+                let userList = users.map(user => (
+                        <UserList
+                            name={user.name}
+                            email={user.email}
+                        />
+                    )
+                );
+
+                setUsers(userList);
+
+            })
+            .catch(err => console.log(err));
+        */
     });
 
     return (
