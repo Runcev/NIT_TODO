@@ -3,10 +3,13 @@ var autoIncrement = require('mongoose-auto-increment');
 
 var Schema = mongoose.Schema;
 
+// користувачі
 var UserSchema = new Schema(
     {
-        name: {type: String, required: true},
-        email: {type: String, required: true, max: 100},
+        name: {type: String, required: true, trim: true},
+        email: {type: String, required: true, max: 100, lowercase: true, trim: true},
+        // хеш пароля md5
+        password: {type: String},
     }
 );
 
