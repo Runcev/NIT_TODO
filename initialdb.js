@@ -18,7 +18,7 @@ autoIncrement.initialize(db);
 
 var User = require('./models/userModel');
 var Entity = require('./models/entityModel');
-var Topic = require('./models/TopicModel');
+var Topic = require('./models/topicModel');
 var Deadline = require('./models/deadlineModel');
 var Event = require('./models/eventModel');
 var Todo = require('./models/todoModel');
