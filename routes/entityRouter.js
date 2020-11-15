@@ -22,7 +22,11 @@ router.get('/', entityController.entityList);
 router.post('/add', entityController.entityAdd);
 
 router.get('/add', function (req, res) {
-    res.render('index', {title: 'Add entity'});
+    res.render('entity/entityAdd', {title: 'Add entity'});
+});
+
+router.get('/:id/edit', function (req, res) {
+    res.render('index', {title: 'Edit entity'});
 });
 
 router.get('/:id', entityController.entityDetail);

@@ -23,6 +23,9 @@ exports.userList = function (req, res) {
 // інфо про користувача
 exports.userDetail = function (req, res) {
 
+    // в req.userID - авторизований юзер
+    console.log(req.userId);
+
     if (req.baseUrl.match(/api/)) {
         res.send('');
     } else {
@@ -31,20 +34,28 @@ exports.userDetail = function (req, res) {
 };
 
 // додаємо користувача
-exports.userAdd = function (req, res) {
+exports.userAdd = function (req, res, next) {
 
     let name = req.body.name;
     let email = req.body.email??'';
 
     var user = new User({name: name, email: email});
 
-    user.save();
-
-    if (req.baseUrl.match(/api/)) {
-        res.send('User added: ' + req.body.name + '/' + req.body.email);
-    } else {
-        res.render('index', {title: 'Scheduler - user added'});
-    }
+    user.save(function (err) {
+        if (err) {
+            if (req.baseUrl.match(/api/)) {
+                res.send('User not added');
+            } else {
+                res.render('index', {title: 'Scheduler - user not added'});
+            }
+        } else {
+            if (req.baseUrl.match(/api/)) {
+                res.send('User added: ' + req.body.name + '/' + req.body.email);
+            } else {
+                res.render('index', {title: 'Scheduler - user added'});
+            }
+        }
+    });
 };
 
 // редагування користувача

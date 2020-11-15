@@ -22,7 +22,11 @@ router.get('/', habitController.habitList);
 router.post('/add', habitController.habitAdd);
 
 router.get('/add', function (req, res) {
-    res.render('index', {title: 'Add habit'});
+    res.render('habit/habitAdd', {title: 'Add habit'});
+});
+
+router.get('/:id/edit', function (req, res) {
+    res.render('index', {title: 'Edit habit'});
 });
 
 router.get('/:id', habitController.habitDetail);
