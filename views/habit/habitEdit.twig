@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h3>{{ title }}</h3>
+
+    <form action="/habit/{{ habit.id }}/update" method="post">
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" value="{{ habit.name }}" class="form-control">
+        </div>
+
+        Is actual? <input type="checkbox" name="isActual" value="1" {% if habit.isActual is same as (true) %}checked{% endif %} class="form-control" style="width: auto;">
+
+        <br>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+{% endblock %}

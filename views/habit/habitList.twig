@@ -13,6 +13,13 @@
                 <td>
                     {{ habit.name }}
                 </td>
+                <td>
+                    {% if habit.isActual %}
+                        is actual
+                    {% else %}
+                        no actual
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>
