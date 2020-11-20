@@ -66,6 +66,7 @@ var habitRouter = require('./routes/habitRouter');
 var topicRouter = require('./routes/topicRouter');
 var todoRouter = require('./routes/todoRouter');
 var entityRouter = require('./routes/entityRouter');
+var deadlineRouter = require('./routes/deadlineRouter');
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
@@ -80,6 +81,8 @@ app.use('/todo', todoRouter);
 app.use('/api/todo', todoRouter);
 app.use('/entity', entityRouter);
 app.use('/api/entity', entityRouter);
+app.use('/deadline', deadlineRouter);
+app.use('/api/deadline', deadlineRouter);
 // -------------------------------------------------
 
 // catch 404 and forward to error handler
