@@ -19,11 +19,11 @@ DELETE (GET)/api/habit/:id/delete - видаляємо
 
 router.get('/', habitController.habitList);
 
+router.get('/add', habitController.habitAddGet);
+
 router.post('/add', habitController.habitAdd);
 
-router.get('/add', function (req, res) {
-    res.render('index', {title: 'Add habit'});
-});
+router.get('/:id/edit', habitController.habitEdit);
 
 router.get('/:id', habitController.habitDetail);
 

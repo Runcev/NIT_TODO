@@ -21,6 +21,14 @@ router.get('/', eventController.eventList);
 
 router.post('/add', eventController.eventAdd);
 
+router.get('/add', function (req, res) {
+    res.render('event/eventAdd', {title: 'Add entity'});
+});
+
+router.get('/:id/edit', function (req, res) {
+    res.render('index', {title: 'Edit event'});
+});
+
 router.get('/:id', eventController.eventDetail);
 
 router.post('/:id/update', eventController.eventUpdate);

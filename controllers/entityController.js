@@ -1,11 +1,22 @@
+var Entity = require('../models/entityModel')
 
 exports.entityList = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler - all entities'});
-    }
+    Entity.find({})
+        .exec(function (err, entities) {
+            if (err) {
+                return next(err);
+            }
+
+            //console.log(JSON.stringify(users));
+
+
+            if (req.baseUrl.match(/api/)) {
+                res.send({ entities: JSON.stringify(entities) });
+            } else {
+                res.render('entity/entityList', {title: 'Entities list', entities: entities});
+            }
+        });
 };
 
 exports.entityDetail = function (req, res) {

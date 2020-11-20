@@ -45,6 +45,19 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// тут буде якась авторизація потім :)
+var userId = function (req, res, next) {
+    var User = require('./models/userModel');
+
+    User.findOne({email: 'admin@gmail.com'}).exec(function (err, user) {
+        // в req.currentUser - авторизований юзер
+        req.currentUser = user;
+        next();
+    });
+}
+
+app.use(userId);
+
 // маршрути ----------------------------------------
 var indexRouter = require('./routes/indexRouter');
 var userRouter = require('./routes/userRouter');
