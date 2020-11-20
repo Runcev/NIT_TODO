@@ -49,9 +49,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 var userId = function (req, res, next) {
     var User = require('./models/userModel');
 
-    User.find({email: 'admin@gmail.com'}).exec(function (err, user) {
-        // в req.userId - авторизований юзер
-        req.userId = user;
+    User.findOne({email: 'admin@gmail.com'}).exec(function (err, user) {
+        // в req.currentUser - авторизований юзер
+        req.currentUser = user;
         next();
     });
 }
