@@ -9,9 +9,9 @@ var EntitySchema = new Schema(
     {
         name: {type: String, required: true, trim: true},
         // користувач
-        user: {type: Schema.ObjectId, ref: 'User', required: true},
+        user: {type: Number, ref: 'User', required: true},
         // типи сутностей теж повинні бути цього користувача
-        topic: {type: Schema.ObjectId, ref: 'Topic'},
+        topic: {type: Number, ref: 'Topic'},
     }
 );
 

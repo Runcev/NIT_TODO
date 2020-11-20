@@ -1,0 +1,47 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h3>{{ title }}</h3>
+
+    <form action="/event/{{ event.id }}/update" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" required value="{{ event.name }}">
+        </div>
+        <div class="form-group">
+            <label>Date (yyyy.mm.dd)</label>
+            <input type="text" name="date" class="form-control" required value="{{ event.date|date('Y.m.d') }}">
+        </div>
+        <div class="form-group">
+            <label>Time start (hh:mm)</label>
+            <input type="text" name="timeStart" class="form-control" required value="{{ event.timeStart }}">
+        </div>
+        <div class="form-group">
+            <label>Time end (hh:mm)</label>
+            <input type="text" name="timeEnd" class="form-control" required value="{{ event.timeEnd }}">
+        </div>
+
+        <div class="form-group">
+            <label>Entity</label>
+            <select name="entity" class="form-control" required>
+                {% for entity in entities %}
+                    <option value="{{ entity.id }}" {% if event.entity == entity.id %}selected{% endif %}>{{ entity.name }} ({{ entity.topic.name }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Place</label>
+            <input type="text" name="place" class="form-control" value="{{ event.place }}">
+        </div>
+
+        <div class="form-group">
+            <label>About</label>
+            <input type="text" name="about" class="form-control" value="{{ event.about }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+{% endblock %}

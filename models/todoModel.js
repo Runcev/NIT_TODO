@@ -8,7 +8,7 @@ var TodoSchema = new Schema(
     {
         name: {type: String, required: true, trim: true},
         dateIn: { type: Date, required: true, default: Date.now },
-        user: {type: Schema.ObjectId, ref: 'User', required: true},
+        user: {type: Number, ref: 'User', required: true},
     }
 );
 

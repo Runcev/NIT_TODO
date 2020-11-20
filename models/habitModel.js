@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var HabitSchema = new Schema(
     {
         name: {type: String, required: true, trim: true},
-        user: {type: Schema.ObjectId, ref: 'User', required: true},
+        user: {type: Number, ref: 'User', required: true},
         // коли була додана звичка
         dateIn: { type: Date, required: true, default: Date.now},
         // актуальна чи ні

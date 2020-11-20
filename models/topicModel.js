@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var TopicSchema = new Schema(
     {
         name: {type: String, required: true, trim: true},
-        user: {type: Schema.ObjectId, ref: 'User', required: true},
+        user: {type: Number, ref: 'User', required: true},
     }
 );
 
