@@ -59,6 +59,20 @@ exports.topicAdd = function (req, res) {
     }
 };
 
+// виводимо форму для редагування
+exports.topicEdit = function (req, res) {
+
+    let topicId = req.params.id;
+
+    Topic.findById(topicId).exec(function (err, topic) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.render('topic/topicEdit', {title: 'Edit topic', topic: topic});
+    });
+};
+
 exports.topicUpdate = function (req, res) {
     
     let name = req.body.name;

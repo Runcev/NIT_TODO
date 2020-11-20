@@ -33,11 +33,12 @@ exports.todoAddGet = function (req, res) {
 exports.todoAdd = function (req, res) {
 
     let name = req.body.name;
+    let date = req.body.date;
 
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
 
-    var todo =new Todo({name: name, user: user});
+    var todo =new Todo({name: name, date: date, user: user});
 
     todo.save(function(err){
         if(err) console.log(err);
@@ -50,11 +51,26 @@ exports.todoAdd = function (req, res) {
     }
 };
 
+// виводимо форму для редагування
+exports.todoEdit = function (req, res) {
+
+    let todoId = req.params.id;
+
+    Todo.findById(todoId).exec(function (err, todo) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.render('todo/todoEdit', {title: 'Edit todo', todo: todo});
+    });
+};
+
 exports.todoUpdate = function (req, res) {
 
     let name = req.body.name;
+    let date = req.body.date;
     
-    var todo = new Todo({name: name, _id: req.params.id});
+    var todo = new Todo({name: name, date: date, _id: req.params.id});
 
     Todo.findByIdAndUpdate(req.params.id, todo, {}, function(err,todo){
         if (err) console.log(err);
