@@ -5,6 +5,16 @@
     <h3>{{ title }}</h3>
 
     <table class="table table-striped">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Is actual?
+            </th>
+        </tr>
         {% for habit in habits %}
             <tr>
                 <td width="20px">
@@ -15,9 +25,9 @@
                 </td>
                 <td>
                     {% if habit.isActual %}
-                        is actual
+                        yes
                     {% else %}
-                        no actual
+                        no
                     {% endif %}
                 </td>
             </tr>

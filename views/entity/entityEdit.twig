@@ -4,17 +4,17 @@
 
     <h3>{{ title }}</h3>
 
-    <form action="/entity/add" method="post">
+    <form action="/entity/{{ entity.id }}/update" method="post">
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" required value="{{ entity.name }}">
         </div>
 
         <div class="form-group">
             <label>Topic</label>
             <select name="topic" class="form-control" required>
                 {% for topic in topics %}
-                    <option value="{{ topic.id }}">{{ topic.name }}</option>
+                    <option value="{{ topic.id }}" {% if entity.topic == topic.id %}selected{% endif %}>{{ topic.name }}</option>
                 {% endfor %}
             </select>
         </div>

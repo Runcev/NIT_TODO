@@ -5,6 +5,16 @@
     <h3>{{ title }}</h3>
 
     <table class="table table-striped">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Date (yyyy.mm.dd)
+            </th>
+        </tr>
         {% for todo in todos %}
             <tr>
                 <td width="20px">
@@ -12,6 +22,9 @@
                 </td>
                 <td>
                     {{ todo.name }}
+                </td>
+                <td>
+                    {{ todo.date|date('Y.m.d') }}
                 </td>
             </tr>
         {% endfor %}
