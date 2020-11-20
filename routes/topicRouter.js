@@ -22,9 +22,9 @@ router.get('/', topicController.topicList);
 
 router.post('/add', topicController.topicAdd);
 
-router.get('/add', function (req, res) {
-    res.render('topic/topicAdd', {title: 'Add topic'});
-});
+router.get('/add', topicController.topicAddGet);
+
+router.get('/:id/edit', topicController.topicEdit);
 
 router.get('/:id/events', topicController.topicEventsList);
 

@@ -13,9 +13,9 @@ router.get('/', todoController.todoList);
 
 router.post('/add', todoController.todoAdd);
 
-router.get('/add', function (req, res) {
-    res.render('todo/todoAdd', {title: 'Add todo'});
-});
+router.get('/add', todoController.todoAddGet);
+
+router.get('/:id/edit', todoController.todoEdit);
 
 router.post('/:id/update', todoController.todoUpdate);
 router.put('/:id/update', todoController.todoUpdate);
