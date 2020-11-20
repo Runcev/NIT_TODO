@@ -5,13 +5,13 @@
     <h3>{{ title }}</h3>
 
     <table class="table table-striped">
-        {% for entitytype in entitytypes %}
+        {% for topic in topics %}
             <tr>
                 <td width="20px">
-                    <a href="{{ entitytype.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                    <a href="{{ topic.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
                 </td>
                 <td>
-                    {{ entitytype.name }}
+                    {{ topic.name }}
                 </td>
             </tr>
         {% endfor %}
