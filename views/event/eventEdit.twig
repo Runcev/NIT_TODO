@@ -10,16 +10,16 @@
             <input type="text" name="name" class="form-control" required value="{{ event.name }}">
         </div>
         <div class="form-group">
-            <label>Date (yyyy.mm.dd)</label>
-            <input type="text" name="date" class="form-control" required value="{{ event.date|date('Y.m.d') }}">
+            <label>Date</label>
+            <input type="date" name="date" class="form-control" required value="{{ event.date|date('Y.m.d') }}">
         </div>
         <div class="form-group">
             <label>Time start (hh:mm)</label>
-            <input type="text" name="timeStart" class="form-control" required value="{{ event.timeStart }}">
+            <input type="time" name="timeStart" class="form-control" required value="{{ event.timeStart }}">
         </div>
         <div class="form-group">
             <label>Time end (hh:mm)</label>
-            <input type="text" name="timeEnd" class="form-control" required value="{{ event.timeEnd }}">
+            <input type="time" name="timeEnd" class="form-control" required value="{{ event.timeEnd }}">
         </div>
 
         <div class="form-group">
