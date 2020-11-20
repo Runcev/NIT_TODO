@@ -5,6 +5,36 @@
     <h3>{{ title }}</h3>
 
     <table class="table table-striped">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Date (yyyy.mm.dd)
+            </th>
+            <th>
+                Start
+            </th>
+            <th>
+                End
+            </th>
+            <th>
+                Topic
+            </th>
+            <th>
+                Entity
+            </th>
+            <th>
+                Place
+            </th>
+            <th>
+                About
+            </th>
+        </tr>
+
         {% for event in events %}
             <tr>
                 <td width="20px">
@@ -14,13 +44,19 @@
                     {{ event.name }}
                 </td>
                 <td>
-                    {{ event.date|date('d.m.Y') }}
+                    {{ event.date|date('Y.m.d') }}
                 </td>
                 <td>
                     {{ event.timeStart }}
                 </td>
                 <td>
                     {{ event.timeEnd }}
+                </td>
+                <td>
+                    {{ event.entity.topic.name }}
+                </td>
+                <td>
+                    {{ event.entity.name }}
                 </td>
                 <td>
                     {{ event.place }}

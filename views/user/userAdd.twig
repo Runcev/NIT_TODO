@@ -7,11 +7,15 @@
     <form action="/user/add" method="post">
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail">E-mail</label>
-            <input type="text" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+            <input type="text" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

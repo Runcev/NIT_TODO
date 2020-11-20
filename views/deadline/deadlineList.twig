@@ -5,6 +5,19 @@
     <h3>{{ title }}</h3>
 
     <table class="table table-striped">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Entity
+            </th>
+            <th>
+                Date (yyyy.mm.dd)
+            </th>
+        </tr>
         {% for deadline in deadlines %}
             <tr>
                 <td width="20px">
@@ -12,6 +25,12 @@
                 </td>
                 <td>
                     {{ deadline.name }}
+                </td>
+                <td>
+                    {{ deadline.entity.name }}
+                </td>
+                <td>
+                    {{ deadline.date|date('Y.m.d') }}
                 </td>
             </tr>
         {% endfor %}
