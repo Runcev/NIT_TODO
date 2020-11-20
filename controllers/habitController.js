@@ -69,8 +69,7 @@ exports.habitEdit = function (req, res) {
 exports.habitUpdate = function (req, res) {
 
     let name = req.body.name;
-
-    let isActual = req.body.isActual ?? false;
+    let isActual = req.body.isActual??false;
 
     var habit = new Habit({name: name, isActual: isActual, _id: req.params.id});
 
