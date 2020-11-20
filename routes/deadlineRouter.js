@@ -21,9 +21,9 @@ router.get('/', deadlineController.deadlineList);
 
 router.post('/add', deadlineController.deadlineAdd);
 
-router.get('/add', function (req, res) {
-    res.render('deadline/deadlineAdd', {title: 'Add deadline'});
-});
+router.get('/add', deadlineController.deadlineAddGet);
+
+router.get('/:id/edit', deadlineController.deadlineEdit);
 
 router.post('/:id/update', deadlineController.deadlineUpdate);
 router.put('/:id/update', deadlineController.deadlineUpdate);
