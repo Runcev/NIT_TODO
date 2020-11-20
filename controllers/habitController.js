@@ -2,7 +2,9 @@ var Habit = require('../models/habitModel')
 
 exports.habitList = function (req, res) {
 
-    Habit.find({})
+    let user = req.currentUser;
+
+    Habit.find({user: user._id})
         .exec(function (err, habits) {
             if (err) {
                 console.log(err);
@@ -69,7 +71,8 @@ exports.habitEdit = function (req, res) {
 exports.habitUpdate = function (req, res) {
 
     let name = req.body.name;
-    let isActual = req.body.isActual??false;
+
+    let isActual = (req.body.isActual == null)?false:req.body.isActual;
 
     var habit = new Habit({name: name, isActual: isActual, _id: req.params.id});
 

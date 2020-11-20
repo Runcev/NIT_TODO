@@ -9,9 +9,6 @@ exports.userList = function (req, res) {
                 return next(err);
             }
 
-            //console.log(JSON.stringify(users));
-
-
             if (req.baseUrl.match(/api/)) {
                 res.send({ users: JSON.stringify(users) });
             } else {
@@ -37,8 +34,7 @@ exports.userDetail = function (req, res) {
 exports.userAdd = function (req, res, next) {
 
     let name = req.body.name;
-
-    let email = req.body.email ?? '';
+    let email = req.body.email;
 
     var user = new User({name: name, email: email});
 
