@@ -37,7 +37,8 @@ exports.userDetail = function (req, res) {
 exports.userAdd = function (req, res, next) {
 
     let name = req.body.name;
-    let email = req.body.email;
+
+    let email = req.body.email ?? '';
 
     var user = new User({name: name, email: email});
 
