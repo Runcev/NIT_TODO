@@ -12,7 +12,7 @@
                 Name
             </th>
             <th>
-                Date (yyyy.mm.dd)
+                Date
             </th>
         </tr>
         {% for todo in todos %}
@@ -24,7 +24,7 @@
                     {{ todo.name }}
                 </td>
                 <td>
-                    {{ todo.date|date('Y.m.d') }}
+                    {{ todo.date|date('d.m.Y') }}
                 </td>
             </tr>
         {% endfor %}

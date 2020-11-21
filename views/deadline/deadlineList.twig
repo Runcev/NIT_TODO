@@ -15,7 +15,7 @@
                 Entity
             </th>
             <th>
-                Date (yyyy.mm.dd)
+                Date
             </th>
         </tr>
         {% for deadline in deadlines %}
@@ -30,7 +30,7 @@
                     {{ deadline.entity.name }}
                 </td>
                 <td>
-                    {{ deadline.date|date('Y.m.d') }}
+                    {{ deadline.date|date('d.m.Y') }}
                 </td>
             </tr>
         {% endfor %}

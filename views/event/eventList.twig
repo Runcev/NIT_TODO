@@ -13,7 +13,7 @@
                 Name
             </th>
             <th>
-                Date (yyyy.mm.dd)
+                Date
             </th>
             <th>
                 Start
@@ -44,7 +44,7 @@
                     {{ event.name }}
                 </td>
                 <td>
-                    {{ event.date|date('Y.m.d') }}
+                    {{ event.date|date('d.m.Y') }}
                 </td>
                 <td>
                     {{ event.timeStart }}
