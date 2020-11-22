@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var md5 = require('md5');
 
 // модуль для керування асинхронними діями
 var async = require('async');
@@ -36,6 +38,12 @@ autoIncrement.initialize(db);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'twig');
 
+app.use(session({
+    secret: '123123@3*&%#$#hkn',
+    resave: false,
+    saveUninitialized: true
+}))
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.json());
@@ -45,15 +53,86 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// тут буде якась авторизація потім :)
+// авторизація
 var userId = function (req, res, next) {
-    var User = require('./models/userModel');
 
-    User.findOne({email: 'admin@gmail.com'}).exec(function (err, user) {
-        // в req.currentUser - авторизований юзер
-        req.currentUser = user;
+    // юзер авторизований
+    if (req.session.currentUser) {
+        req.currentUser = req.session.currentUser;
         next();
-    });
+
+        // переадресовуємо на форму авторизації
+    } else if (!req.url.match(/user\/(login|add)$/)) {
+        if (req.url.match(/api/)) {
+            res.send('');
+        } else {
+            res.render('user/userLogin', {title: 'Login'});
+        }
+
+        // реєструємось
+    } else if (req.url.match(/user\/add$/)) {
+
+
+        let name = req.body.name??'';
+        let email = req.body.email??'';
+        let password = req.body.password??'';
+
+        if (email != '' && email != '' && password != '') {
+
+            var User = require('./models/userModel');
+
+            var user = new User({name: name, email: email, password: md5(password)});
+
+            user.save(function (err) {
+                if (err) {
+                    if (req.baseUrl.match(/api/)) {
+                        res.send('User not added');
+                    } else {
+                        res.redirect('/');
+                    }
+                } else {
+                    if (req.baseUrl.match(/api/)) {
+                        res.send('User added: ' + req.body.name + '/' + req.body.email);
+                    } else {
+                        res.redirect('/');
+                    }
+                }
+            });
+
+            // форма реєстрації
+        } else {
+            if (req.url.match(/api/)) {
+                res.send('');
+            } else {
+                res.render('user/userAdd', {title: 'Registration'});
+            }
+        }
+
+        // авторизуємось
+    } else if (req.url.match(/user\/login$/)) {
+        let email = req.body.email??'';
+        let password = req.body.password??'';
+
+        var User = require('./models/userModel');
+
+        User.findOne({email: email, password: md5(password)}).exec(function (err, user) {
+            // в currentUser - авторизований юзер
+            if (user) {
+                if (req.baseUrl.match(/api/)) {
+                    res.send('');
+                } else {
+                    req.session.currentUser = user;
+                    res.redirect('/event');
+                }
+            } else {
+                if (req.baseUrl.match(/api/)) {
+                    res.send('');
+                } else {
+                    res.render('user/userLogin', {title: 'Login', error: true});
+                }
+            }
+        });
+    }
 }
 
 app.use(userId);
