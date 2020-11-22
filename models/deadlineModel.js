@@ -9,6 +9,7 @@ var DeadlineSchema = new Schema(
         date: { type: Date, required: true, default: Date.now },
         name: {type: String, required: true, trim: true},
         entity: {type: Number, ref: 'Entity', required: true},
+        user: {type: Number, ref: 'User', required: true},
     }
 );
 
