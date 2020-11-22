@@ -54,9 +54,9 @@ function createUsers(cb) {
         cb);
 }
 
-function deadlineCreate(name, date, entity, cb) {
+function deadlineCreate(name, date, entity, user, cb) {
 
-    var deadline = new Deadline({name: name, entity: entity});
+    var deadline = new Deadline({name: name, entity: entity, user: user});
 
     if (date != '') {
         deadline.date = date;
@@ -76,16 +76,16 @@ function createDeadlines(cb) {
 
     async.series([
             function (callback) {
-                deadlineCreate('Lab1', '2020-11-20T16:00Z', entities[0], callback);
+                deadlineCreate('Lab1', '2020-11-20T16:00Z', entities[0], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab2', '2020-11-25T17:00Z', entities[0], callback);
+                deadlineCreate('Lab2', '2020-11-25T17:00Z', entities[0], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab3', '2020-11-21T23:00Z', entities[1], callback);
+                deadlineCreate('Lab3', '2020-11-21T23:00Z', entities[1], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab4', '2020-11-27T23:00Z', entities[1], callback);
+                deadlineCreate('Lab4', '2020-11-27T23:00Z', entities[1], users[0], callback);
             },
         ],
         // optional callback
