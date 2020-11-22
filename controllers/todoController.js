@@ -2,7 +2,9 @@ var Todo = require('../models/todoModel')
 
 exports.todoList = function (req, res) {
 
-    Todo.find({})
+    let user = req.currentUser;
+
+    Todo.find({user: user._id})
     .exec(function (err, todos) {
         if (err) {
             console.log(err);

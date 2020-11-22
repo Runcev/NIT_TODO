@@ -2,7 +2,9 @@ var Topic = require('../models/topicModel')
 
 exports.topicList = function (req, res) {
 
-    Topic.find({})
+    let user = req.currentUser;
+
+    Topic.find({user: user._id})
     .exec(function (err, topics) {
         if (err) {
             console.log(err);

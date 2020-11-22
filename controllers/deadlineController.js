@@ -3,7 +3,9 @@ var Entity = require('../models/entityModel')
 
 exports.deadlineList = function (req, res) {
 
-    Deadline.find({}).populate('entity')
+    let user = req.currentUser;
+
+    Deadline.find({user: user._id}).populate('entity')
         .exec(function(err,deadlines){
             if(err){
                 console.log(err);
@@ -46,8 +48,9 @@ exports.deadlineAdd = function (req, res) {
     let name = req.body.name;
     let entity = req.body.entity;
     let date = req.body.date;
+    let user = req.currentUser;
 
-    var deadline = new Deadline({date: date, name: name, entity: entity});
+    var deadline = new Deadline({date: date, name: name, entity: entity, user: user});
 
     deadline.save(function(err){
         if(err) console.log(err);

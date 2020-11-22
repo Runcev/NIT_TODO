@@ -3,7 +3,9 @@ var Topic = require('../models/topicModel');
 
 exports.entityList = function (req, res) {
 
-    Entity.find({}).populate('topic')
+    let user = req.currentUser;
+
+    Entity.find({user: user._id}).populate('topic')
         .exec(function (err, entities) {
             if (err) {
                 return next(err);

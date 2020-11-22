@@ -1,4 +1,5 @@
-var User = require('../models/userModel')
+var User = require('../models/userModel');
+var md5 = require('md5');
 
 // всі користувачі
 exports.userList = function (req, res) {
@@ -17,60 +18,48 @@ exports.userList = function (req, res) {
         });
 };
 
-// інфо про користувача
-exports.userDetail = function (req, res) {
+// виводимо форму для редагування
+exports.userEdit = function (req, res) {
 
-    // в req.userID - авторизований юзер
-    console.log(req.userId);
+    let user = req.currentUser;
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler - info about user'});
-    }
-};
-
-// додаємо користувача
-exports.userAdd = function (req, res, next) {
-
-    let name = req.body.name;
-    let email = req.body.email;
-
-    var user = new User({name: name, email: email});
-
-    user.save(function (err) {
+    User.findById(user._id).exec(function (err, user) {
         if (err) {
-            if (req.baseUrl.match(/api/)) {
-                res.send('User not added');
-            } else {
-                res.render('index', {title: 'Scheduler - user not added'});
-            }
-        } else {
-            if (req.baseUrl.match(/api/)) {
-                res.send('User added: ' + req.body.name + '/' + req.body.email);
-            } else {
-                res.render('index', {title: 'Scheduler - user added'});
-            }
+            if (err) console.log(err);
         }
+
+        res.render('user/userEdit', {title: 'Edit profile', user: user});
     });
 };
 
 // редагування користувача
 exports.userUpdate = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
+    let name = req.body.name;
+    let email = req.body.email;
+    let password = req.body.password;
+    let curUser = req.currentUser;
+
+    if (password != '') {
+        var user = new User({email: email, name: name, password: md5(password), _id: curUser._id});
     } else {
-        res.render('index', {title: 'Scheduler - update user'});
+        var user = new User({email: email, name: name, _id: curUser._id});
     }
+
+    User.findByIdAndUpdate(curUser._id, user, {}, function(err, user){
+        if(err) console.log(err);
+
+        if (req.baseUrl.match(/api/)) {
+            res.send('');
+        } else {
+            res.redirect('/');
+        }
+    });
 };
 
-// авторизація користувача
-exports.userLogin = function (req, res) {
+exports.userLogout = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    req.session.destroy();
+
+    res.redirect('/');
 };
