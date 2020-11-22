@@ -3,29 +3,15 @@ var router = express.Router();
 var userController = require('../controllers/userController');
 
 /*
-// middleware - це якщо щось треба буде спочатку виконати при всіх запитах
-router.use(function (req, res, next) {
-    next()
-})
- */
+ реєстрація та авторизація винесена в appServer.js
+*/
 
 router.get('/', userController.userList);
 
-router.post('/login', userController.userLogin);
+router.get('/logout', userController.userLogout);
 
-router.get('/add', function (req, res) {
-    res.render('user/userAdd', {title: 'Add user'});
-});
+router.get('/profile', userController.userEdit);
 
-router.get('/:id/edit', function (req, res) {
-    res.render('index', {title: 'Edit user'});
-});
-
-router.post('/add', userController.userAdd);
-
-router.post('/:id/update', userController.userUpdate);
-router.put('/:id/update', userController.userUpdate);
-
-router.get('/:id', userController.userDetail);
+router.post('/update', userController.userUpdate);
 
 module.exports = router;
