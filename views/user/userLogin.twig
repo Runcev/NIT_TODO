@@ -1,4 +1,4 @@
-{% extends 'layout.twig' %}
+{% extends 'layoutForLogin.twig' %}
 
 {% block body %}
 
@@ -7,7 +7,7 @@
     <form action="/user/login" method="post">
         <div class="form-group">
             <label for="exampleInputEmail">E-mail</label>
-            <input type="text" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" required>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" required>
         </div>
 
         <div class="form-group">
