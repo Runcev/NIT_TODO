@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from "moment"
+import moment from 'moment'
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 import './App.css';
@@ -14,29 +14,29 @@ const localizer = momentLocalizer(moment)
 const DnDCalendar = withDragAndDrop(Calendar);
 
 function App(){
-   
+
     const events = [
         {
             start: moment().toDate(),
             end: moment().add("days").toDate(),
-            title: "Some title", 
+            title: "Some title",
         }
     ];
 
     const onEventResize = (data) => {
         const { start, end } = data;
-    
+
         this.setState(() => {
           events[0].start = start;
           events[0].end = end;
           return { events: [...events] };
         });
       };
-    
+
     const onEventDrop = (data) => {
         console.log(data);
       };
-      
+
 
 
     const callApi = async () => {
@@ -109,54 +109,69 @@ function App(){
             .catch(err => console.log(err));
         */
     });
-
-    return (
-        <div className="App">
+    
+    const calendar = <div className="calendar">
+        <DnDCalendar
+            defaultDate={moment().toDate()}
+            defaultView="month"
+            events={events}
+            localizer={localizer}
+            onEventDrop={onEventDrop}
+            onEventResize={onEventResize}
+            resizable
+            style={{ height: "84vh" }}
+        />
+    </div>;
+    const login =
+        <div>
             <div className ="head">
                 <h1>Scheduler - Test ReactApp</h1>
                 <p>{responseToPost}</p>
             </div>
-
             <div className ="users">
                 {users}
             </div>
             <div className = "block-bottom">
-            <form className="box" onSubmit={handleSubmit}>
-                 <h1>Login</h1>
-               <input
-                    type="text"
-                    placeholder="Username"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                />
+                <form className="box" onSubmit={handleSubmit}>
+                    <h1>Login</h1>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                    />
 
-                <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
 
-                <input type ="submit" value="Login"/>
-            </form>
+                    <input type ="submit" value="Login"/>
+                </form>
             </div>
+        </div>;
 
-            {/* <div className="calendar">
-                <DnDCalendar
-                    defaultDate={moment().toDate()}
-                    defaultView="month"
-                    events={events}
-                    localizer={localizer}
-                    onEventDrop={onEventDrop}
-                    onEventResize={onEventResize}
-                    resizable
-                    style={{ height: "100vh" }}
-                />
+    return (
+        <div className="App">
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="navButtons">
 
-            </div> */}
-            
-        </div>        
-    ); 
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-9 ">
+                        {calendar}
+                    </div>
+                    <div className="col3">
+                        vrotibahdfds
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
