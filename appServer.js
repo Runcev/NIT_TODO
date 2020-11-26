@@ -56,6 +56,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 // авторизація
 var userId = function (req, res, next) {
 
+    // тимчасова "заглушка", щоб реєстрацію не питало кожен раз :)
+    var User = require('./models/userModel');
+
+    User.findOne({email: 'admin@gmail.com'}).exec(function (err, user) {
+        // в req.currentUser - авторизований юзер
+        req.currentUser = user;
+        next();
+        });
+
+    /*
     // юзер авторизований
     if (req.session.currentUser) {
         req.currentUser = req.session.currentUser;
@@ -133,6 +143,7 @@ var userId = function (req, res, next) {
             }
         });
     }
+    */
 }
 
 app.use(userId);
