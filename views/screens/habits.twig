@@ -1,0 +1,27 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h3>{{ title }}</h3>
+
+        {% for habit in habits %}
+           <div class="habit-container">
+               <div class="habit-name">
+                   {{ habit.name }}
+               </div>
+               <div class="habit-line">
+
+               </div>
+               <div class="habit-big-num">
+                   {{ habit.counter }}
+               </div>
+               <div class="habit-progress-bar">
+                   {{ habit.thisMonthCounter }}
+               </div>
+               <div class="habit-more-statistic">
+                   {{ habit.moreStatisticUrl }}
+               </div>
+           </div>
+        {% endfor %}
+
+{% endblock %}
