@@ -2,6 +2,15 @@
 
 {% block body %}
 
-    {{ title }}
+    <div id="calendar"></div>
 
 {% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="calendar/js/app.bundle.js"></script>
+
+{% endblock %}
+
