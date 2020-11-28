@@ -2,6 +2,45 @@
   основний файл зі стилями
 */
 
+/*
+  Menu Buttons Style
+*/
+.menu-buttons-container{
+    margin: 15px 0;
+}
+.menu-buttons-container button{
+    border: 0;
+    color: #7cbb5d;
+    font-weight: bold;
+    display: inline-block;
+    transition:
+            background-color 0.3s linear;
+}
+.menu-buttons-container button:hover{
+    background-color: #7cbb5d;
+    color: #f1f1f1;
+}
+.circle-button{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.rounded-button {
+    border-radius: 40px;
+    padding: 0 2em;
+    height: 40px;
+}
+
+/*
+  Menu Buttons Style End
+*/
+
+
+
+
+
+
+
 
 /*
     Habit's Screen Style
