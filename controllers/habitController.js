@@ -18,6 +18,24 @@ exports.habitList = function (req, res) {
         });
 };
 
+exports.habitView = function (req, res) {
+
+    let user = req.currentUser;
+
+    Habit.find({user: user._id})
+        .exec(function (err, habits) {
+            if (err) {
+                console.log(err);
+            }
+
+            if (req.baseUrl.match(/api/)) {
+                res.send({ habits: JSON.stringify(habits) });
+            } else {
+                res.render('screens/habits.twig', {title: 'Habits list', habits: habits});
+            }
+        });
+};
+
 exports.habitDetail = function (req, res) {
 
     if (req.baseUrl.match(/api/)) {

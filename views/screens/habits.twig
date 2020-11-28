@@ -1,0 +1,48 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h3>{{ title }}</h3>
+    <div class="container-fluid col-8" style="margin: 0px">
+        {% for habit in habits %}
+                <div class="habit-container row">
+                    <div class="habit-name col-12">
+                        {{ habit.name }}
+                    </div>
+                    <div class="habit-line col-12">
+
+                    </div>
+                    <div class="habit-big-num col-3">
+                        {{ habit.counter }}
+                    </div>
+                    <div class="habit-progress-bar col-4">
+
+                        <div class="pie-wrapper progress-45 style-2">
+                            <span class="label">   {{ habit.thisMonthCounter/habit.thisMonthTargetCount*100 }}<span class="smaller">%</span></span>
+                            <div class="pie">
+                                <div class="left-side half-circle"></div>
+                                <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                        </div>
+
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+            </div>
+            <div class="under-info-container row">
+                <div class="col-3">
+
+                </div>
+                <div class="col-4">
+
+                </div>
+                <div class="habit-more-statistic col-3">
+                    {{ habit.moreStatisticUrl }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
