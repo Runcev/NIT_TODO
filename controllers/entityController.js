@@ -1,5 +1,7 @@
 var Entity = require('../models/entityModel');
 var Topic = require('../models/topicModel');
+var Event = require('../models/eventModel');
+var Deadline = require('../models/deadlineModel');
 
 exports.entityList = function (req, res) {
 
@@ -11,9 +13,6 @@ exports.entityList = function (req, res) {
                 return next(err);
             }
 
-            //console.log(JSON.stringify(users));
-
-
             if (req.baseUrl.match(/api/)) {
                 res.send({ entities: JSON.stringify(entities) });
             } else {
@@ -24,11 +23,31 @@ exports.entityList = function (req, res) {
 
 exports.entityDetail = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    let user = req.currentUser;
+    let entityId = req.params.id;
+
+    Entity.find({user: user._id, _id: entityId})
+        .exec(function (err, entity) {
+            if (err) console.log(err);
+
+            Event.find({user: user._id, entity: entity[0]._id})
+                .exec(function (err, events) {
+                    if (err) console.log(err);
+
+                    Deadline.find({user: user._id, entity: entity[0]._id})
+                        .exec(function(err,deadlines){
+                            if(err){
+                                console.log(err);
+                            }
+
+                            if (req.baseUrl.match(/api/)) {
+                                res.send({entity: JSON.stringify(entity[0]), events: JSON.stringify(events), deadlines: JSON.stringify(deadlines)});
+                            } else {
+                                res.render('entity/entityDetail', {title: 'Entity', entity: entity[0], events: events, deadlines: deadlines});
+                            }
+                        });
+                });
+        });
 };
 
 // виводимо форму для створення нового запису

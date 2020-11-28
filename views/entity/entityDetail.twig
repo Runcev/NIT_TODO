@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+
+    <h3>{{ entity.name }}</h3>
+
+
+    <h3>Scheduler</h3>
+
+    {% for event in events %}
+        {{ event.date|date('d.m.Y') }} {{ event.name }}<br>
+    {% endfor %}
+
+    <h3>Deadline</h3>
+
+    {% for deadline in deadlines %}
+        {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}<br>
+    {% endfor %}
+
+{% endblock %}
