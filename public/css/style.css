@@ -2,6 +2,8 @@
   основний файл зі стилями
 */
 
+a:hover { text-decoration: none; }
+
 /*
   Menu Buttons Style
 */
