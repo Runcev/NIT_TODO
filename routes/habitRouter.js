@@ -19,6 +19,8 @@ DELETE (GET)/api/habit/:id/delete - видаляємо
 
 router.get('/', habitController.habitList);
 
+router.get('/view', habitController.habitView);
+
 router.get('/add', habitController.habitAddGet);
 
 router.post('/add', habitController.habitAdd);
