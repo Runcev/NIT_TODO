@@ -12,6 +12,9 @@ var HabitSchema = new Schema(
         dateIn: { type: Date, required: true, default: Date.now},
         // актуальна чи ні
         isActual: {type: Boolean, default: true},
+        thisMonthTargetCount: {type: Number},
+        thisMonthCounter: {type: Number},
+        counter: {type: Number}
     }
 );
 

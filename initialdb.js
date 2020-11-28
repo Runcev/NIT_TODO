@@ -210,11 +210,14 @@ function createEvents(cb) {
     dateIn: { type: Date, required: true, default: Date.now},
     // актуальна чи ні
     isActual: {type: Boolean, default: true},
-
+    thisMonthTargetCount: {type: Number, default: 0},
+    thisMonthCounter: {type: Number, default: 0},
+    counter: {type: Number, default: 0}
 */
-function habitCreate(name, user, isActual, cb) {
 
-    var habit = new Habit({name: name, user: user, isActual: isActual});
+function habitCreate(name, user, isActual, thisMonthTargetCount, thisMonthCounter, counter, cb) {
+
+    var habit = new Habit({name: name, user: user, isActual: isActual, thisMonthTargetCount: thisMonthTargetCount, thisMonthCounter: thisMonthCounter, counter: counter});
 
     habit.save(function (err) {
 
@@ -230,10 +233,10 @@ function createHabits(cb) {
 
     async.series([
             function (callback) {
-                habitCreate('Meditation', users[0], true, callback);
+                habitCreate('Meditation', users[0], true, 15, 3, 45, callback);
             },
             function (callback) {
-                habitCreate('Reading', users[0], true, callback);
+                habitCreate('Reading', users[0], true, 10, 7, 20, callback);
             },
         ],
         // optional callback

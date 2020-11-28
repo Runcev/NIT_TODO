@@ -18,24 +18,6 @@ exports.habitList = function (req, res) {
         });
 };
 
-exports.habitView = function (req, res) {
-
-    let user = req.currentUser;
-
-    Habit.find({user: user._id})
-        .exec(function (err, habits) {
-            if (err) {
-                console.log(err);
-            }
-
-            if (req.baseUrl.match(/api/)) {
-                res.send({ habits: JSON.stringify(habits) });
-            } else {
-                res.render('screens/habits.twig', {title: 'Habits list', habits: habits});
-            }
-        });
-};
-
 exports.habitDetail = function (req, res) {
 
     if (req.baseUrl.match(/api/)) {
@@ -54,11 +36,12 @@ exports.habitAddGet = function (req, res) {
 exports.habitAdd = function (req, res) {
 
     let name = req.body.name;
+    let thisMonthTargetCount = req.body.thisMonthTargetCount;
 
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
 
-    var habit = new Habit({name: name, user: user, isActual: true});
+    var habit = new Habit({name: name, user: user, isActual: true, thisMonthTargetCount: thisMonthTargetCount, thisMonthCounter: 0, counter: 0});
 
     habit.save(function (err) {
 
@@ -89,10 +72,11 @@ exports.habitEdit = function (req, res) {
 exports.habitUpdate = function (req, res) {
 
     let name = req.body.name;
-
+    let thisMonthTargetCount = req.body.thisMonthTargetCount;
     let isActual = (req.body.isActual == null)?false:req.body.isActual;
 
-    var habit = new Habit({name: name, isActual: isActual, _id: req.params.id});
+
+    var habit = new Habit({name: name, isActual: isActual, thisMonthTargetCount: thisMonthTargetCount, _id: req.params.id});
 
     Habit.findByIdAndUpdate(req.params.id, habit, {}, function (err, habit) {
         if (err) console.log(err);
