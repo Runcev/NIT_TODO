@@ -133,6 +133,11 @@
             $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
+    <script>
+        if (window.location.href==="http://localhost:5000/") document.getElementById("calendarButton").classList.add('menu-active-button');
+        if (window.location.href==="http://localhost:5000/habit") document.getElementById("habitsButton").classList.add('menu-active-button');
+        if (window.location.href==="http://localhost:5000/entity") document.getElementById("entitiesButton").classList.add('menu-active-button');
+    </script>
 {% endblock %}
 
 </body>

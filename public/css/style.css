@@ -25,14 +25,14 @@
     color: #f1f1f1;
     outline: 0;
 }
-.menu-buttons-container button:active{
+.menu-buttons-container button:visited{
     background-color: #7cbb5d;
     color: #f1f1f1;
     outline: 0;
 }
 .menu-active-button{
     background-color: #7cbb5d;
-    color: #f1f1f1;
+    color: #f1f1f1 !important;
     outline: 0;
 }
 .circle-button{
