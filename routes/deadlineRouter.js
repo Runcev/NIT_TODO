@@ -23,6 +23,8 @@ router.post('/add', deadlineController.deadlineAdd);
 
 router.get('/add', deadlineController.deadlineAddGet);
 
+router.get('/add/:entityId', deadlineController.deadlineAddGet);
+
 router.get('/:id/edit', deadlineController.deadlineEdit);
 
 router.post('/:id/update', deadlineController.deadlineUpdate);

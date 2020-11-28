@@ -13,11 +13,18 @@ exports.entityList = function (req, res) {
                 return next(err);
             }
 
-            if (req.baseUrl.match(/api/)) {
-                res.send({ entities: JSON.stringify(entities) });
-            } else {
-                res.render('entity/entityList', {title: 'Entities list', entities: entities});
-            }
+            Topic.find({user: user._id})
+                .exec(function (err, topics) {
+                    if (err) {
+                        console.log(err);
+                    }
+
+                    if (req.baseUrl.match(/api/)) {
+                        res.send({ entities: JSON.stringify(entities) });
+                    } else {
+                        res.render('entity/entityList', {title: 'Entities list', entities: entities, topics: topics});
+                    }
+                });
         });
 };
 
@@ -54,13 +61,14 @@ exports.entityDetail = function (req, res) {
 exports.entityAddGet = function (req, res) {
 
     let user = req.currentUser;
+    let topicId = req.params.topicId??0;
 
     // список всіх topics авторизованого юзера
     Topic.find({user: user._id})
         .exec(function (err, topics) {
             if (err) console.log(err);
 
-            res.render('entity/entityAdd', {title: 'Add entity', topics: topics});
+            res.render('entity/entityAdd', {title: 'Add entity', topics: topics, topicId: topicId});
         });
 }
 

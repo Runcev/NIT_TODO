@@ -1,4 +1,5 @@
-var Topic = require('../models/topicModel')
+var Topic = require('../models/topicModel');
+var Entity = require('../models/entityModel');
 
 exports.topicList = function (req, res) {
 
@@ -29,11 +30,24 @@ exports.topicEventsList = function (req, res) {
 
 exports.topicDetail = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    let user = req.currentUser;
+    let topicId = req.params.id;
+
+    Topic.find({user: user._id, _id: topicId})
+        .exec(function (err, topic) {
+            if (err) console.log(err);
+
+            Entity.find({user: user._id, topic: topic[0]._id})
+                .exec(function (err, entities) {
+                    if (err) console.log(err);
+
+                    if (req.baseUrl.match(/api/)) {
+                        res.send({topic: JSON.stringify(topic[0]), entity: JSON.stringify(entities)});
+                    } else {
+                        res.render('topic/topicDetail', {title: 'Topic', topic: topic[0], entities: entities});
+                    }
+                });
+        });
 };
 
 // виводимо форму для створення нового запису

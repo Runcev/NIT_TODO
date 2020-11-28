@@ -11,10 +11,13 @@
                     <a href="{{ topic.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
                 </td>
                 <td>
-                    {{ topic.name }}
+                    <a href="{{ topic.url }}" title="Detail">{{ topic.name }}</a>
                 </td>
             </tr>
         {% endfor %}
     </table>
+
+    <br>
+    <a href="/topic/add">Add topic</a>
 
 {% endblock %}

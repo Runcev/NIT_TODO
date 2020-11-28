@@ -1,0 +1,16 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h2>{{ topic.name }}</h2>
+
+    <br>
+
+    {% for entity in entities %}
+        {{ entity.name }}<br>
+    {% endfor %}
+
+    <br><br>
+    <a href="/entity/add/{{ topic.id }}">Add entity to {{ topic.name }}</a>
+
+{% endblock %}

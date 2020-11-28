@@ -14,7 +14,7 @@
             <label>Entity</label>
             <select name="entity" class="form-control" required>
                 {% for entity in entities %}
-                    <option value="{{ entity.id }}">{{ entity.name }} ({{ entity.topic.name }})</option>
+                    <option value="{{ entity.id }}" {% if entityId == entity.id %}selected{% endif %}>{{ entity.name }} ({{ entity.topic.name }})</option>
                 {% endfor %}
             </select>
         </div>

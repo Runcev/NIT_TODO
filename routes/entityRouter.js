@@ -22,6 +22,7 @@ router.get('/', entityController.entityList);
 router.post('/add', entityController.entityAdd);
 
 router.get('/add', entityController.entityAddGet);
+router.get('/add/:topicId', entityController.entityAddGet);
 
 router.get('/:id/edit', entityController.entityEdit);
 

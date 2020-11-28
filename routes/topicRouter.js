@@ -26,6 +26,8 @@ router.get('/add', topicController.topicAddGet);
 
 router.get('/:id/edit', topicController.topicEdit);
 
+router.get('/:id', topicController.topicDetail);
+
 router.get('/:id/events', topicController.topicEventsList);
 
 router.post('/:id/update', topicController.topicUpdate);

@@ -23,6 +23,8 @@ router.post('/add', eventController.eventAdd);
 
 router.get('/add', eventController.eventAddGet);
 
+router.get('/add/:entityId', eventController.eventAddGet);
+
 router.get('/:id/edit', eventController.eventEdit);
 
 router.get('/:id', eventController.eventDetail);

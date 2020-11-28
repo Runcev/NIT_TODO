@@ -31,13 +31,14 @@ exports.eventDetail = function (req, res) {
 exports.eventAddGet = function (req, res) {
 
     let user = req.currentUser;
+    let entityId = req.params.entityId??0;
 
     // список всіх сутностей авторизованого юзера
     Entity.find({user: user._id}).populate('topic')
         .exec(function (err, entities) {
             if (err) console.log(err);
 
-            res.render('event/eventAdd', {title: 'Add event', entities: entities});
+            res.render('event/eventAdd', {title: 'Add event', entities: entities, entityId: entityId});
         });
 }
 

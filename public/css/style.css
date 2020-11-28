@@ -127,12 +127,12 @@ a:hover { text-decoration: none; }
     border-radius: 15px;
 }
 
-.fix-fucking-frame{
+.fix-frame{
     padding: 5px;
     margin: 5px;
 }
 
-.fix-fucking-frame :focus{
+.fix-frame :focus{
     outline: 0;
 }
 

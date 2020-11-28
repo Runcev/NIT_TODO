@@ -32,13 +32,14 @@ exports.deadlineDetail = function (req, res) {
 exports.deadlineAddGet = function (req, res) {
 
     let user = req.currentUser;
+    let entityId = req.params.entityId??0;
 
     // список всіх сутностей авторизованого юзера
     Entity.find({user: user._id}).populate('topic')
         .exec(function (err, entities) {
             if (err) console.log(err);
 
-            res.render('deadline/deadlineAdd', {title: 'Add deadline', entities: entities});
+            res.render('deadline/deadlineAdd', {title: 'Add deadline', entities: entities, entityId: entityId});
         });
 }
 

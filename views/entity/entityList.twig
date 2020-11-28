@@ -2,32 +2,21 @@
 
 {% block body %}
 
-    <h3>{{ title }}</h3>
+    {% for topic in topics %}
+        <h3>{{ topic.name }}</h3>
 
-    <table class="table table-striped">
-        <tr>
-            <th>
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Topic
-            </th>
-        </tr>
         {% for entity in entities %}
-            <tr>
-                <td width="20px">
-                    <a href="{{ entity.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
-                </td>
-                <td>
-                    <a href="{{ entity.url }}" title="Detail">{{ entity.name }}</a>
-                </td>
-                <td>
-                    {{ entity.topic.name }}
-                </td>
-            </tr>
+
+            {% if entity.topic.id == topic.id %}
+                <a href="{{ entity.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a> <a href="{{ entity.url }}" title="Detail">{{ entity.name }}</a> <br>
+            {% endif %}
+
         {% endfor %}
-    </table>
+
+    {% endfor %}
+
+    <br><br>
+
+    <a href="/entity/add">Add entity</a>
 
 {% endblock %}

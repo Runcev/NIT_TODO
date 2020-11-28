@@ -14,7 +14,7 @@
             <label>Topic</label>
             <select name="topic" class="form-control" required>
                 {% for topic in topics %}
-                    <option value="{{ topic.id }}">{{ topic.name }}</option>
+                    <option value="{{ topic.id }}" {% if topicId == topic.id %}selected{% endif %}>{{ topic.name }}</option>
                 {% endfor %}
             </select>
         </div>

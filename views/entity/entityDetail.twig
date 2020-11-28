@@ -6,7 +6,7 @@
     <h3 class = "name-entity-detail-frame">{{ entity.name }}</h3>
     <a href="{{ entity.url }}/edit" data-toggle="tooltip" ><i class="far fa-edit edit-icon-pos-set"></i></a>
 
-    <details class="fix-fucking-frame">
+    <details class="fix-frame">
         <summary class = "style-for-entity-detail-list"> Scheduler</summary>
 
         {% for event in events %}
@@ -14,12 +14,16 @@
         {% endfor %}
     </details>
 
-    <details class="fix-fucking-frame">
+    <a href="/event/add/{{ entity.id }}">Add event</a>
+
+    <details class="fix-frame">
         <summary class = "style-for-entity-detail-list"> Deadline</summary>
         {% for deadline in deadlines %}
         <div class = "events-in-list-style" > • {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
         {% endfor %}
     </details>
+
+    <a href="/deadline/add/{{ entity.id }}">Add deadline</a>
 
 </div>
 {% endblock %}
