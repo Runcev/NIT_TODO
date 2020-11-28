@@ -15,7 +15,7 @@
                     <div class="habit-big-num col-3">
                         {{ habit.counter }}
                     </div>
-                    <div class="habit-progress-bar col-3">
+                    <div class="habit-progress-bar col-4">
 
                         <div class="pie-wrapper progress-45 style-2">
                             <span class="label">   {{ habit.thisMonthCounter/habit.thisMonthTargetCount*100 }}<span class="smaller">%</span></span>
@@ -27,8 +27,19 @@
                         </div>
 
                     </div>
-                    <div class="habit-more-statistic col-3">
-                        {{ habit.moreStatisticUrl }}
+                    <div class="col-3">
+
+                    </div>
+            </div>
+            <div class="under-info-container row">
+                <div class="col-3">
+
+                </div>
+                <div class="col-4">
+
+                </div>
+                <div class="habit-more-statistic col-3">
+                    {{ habit.moreStatisticUrl }}
                 </div>
             </div>
         {% endfor %}

@@ -18,20 +18,29 @@
     background-color: #333;
 }
 .habit-big-num{
-    font-size: 7.5em;
+    font-size: 7em;
     color: #7cbb5d;
 }
 .habit-progress-bar{
     color: #7cbb5d;
-    font-size: 10em;
+    font-size: 9em;
 }
 .habit-more-statistic{
 
 }
-
+.under-info-container{
+    text-align: center;
+}
 /*
     PROGRESS BAR in Habit's Screen
  */
+.pie-wrapper.progress-45 .pie .left-side {
+    -webkit-transform: rotate(162deg);
+    transform: rotate(162deg);
+}
+.pie-wrapper.progress-45 .pie .right-side {
+    display: none;
+}
 .pie-wrapper {
     height: 1em;
     width: 1em;
@@ -50,7 +59,7 @@
 .pie-wrapper .pie .half-circle {
     height: 100%;
     width: 100%;
-    border: 0.1em solid #3498db;
+    border: 0.1em solid #7cbb5d;
     border-radius: 50%;
     clip: rect(0, 0.5em, 1em, 0);
     left: 0;
