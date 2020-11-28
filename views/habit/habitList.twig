@@ -17,14 +17,8 @@
                         {{ habit.counter }}
                     </div>
                     <div class="habit-progress-bar col-4">
-
-                        <div class="pie-wrapper progress-45 style-2">
-                            <span class="label">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}<span class="smaller">%</span></span>
-                            <div class="pie">
-                                <div class="left-side half-circle"></div>
-                                <div class="right-side half-circle"></div>
-                            </div>
-                            <div class="shadow"></div>
+                        <div class="progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
+                            <div class="progress__number">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}%</div>
                         </div>
 
                     </div>
@@ -55,16 +49,9 @@
                         {{ habit.counter }}
                     </div>
                     <div class="habit-progress-bar col-4">
-
-                        <div class="pie-wrapper progress-45 style-2">
-                            <span class="label">{{ habit.thisMonthCounter/habit.thisMonthTargetCount*100 }}<span class="smaller">%</span></span>
-                            <div class="pie">
-                                <div class="left-side half-circle"></div>
-                                <div class="right-side half-circle"></div>
-                            </div>
-                            <div class="shadow"></div>
+                        <div class="progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
+                            <div class="progress__number">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}%</div>
                         </div>
-
                     </div>
                     <div class="col-3">
 
@@ -72,10 +59,10 @@
                 </div>
                 <div class="under-info-container row">
                     <div class="col-3">
-
+                        All the time
                     </div>
                     <div class="col-4">
-
+                        This month
                     </div>
                     <div class="habit-more-statistic col-3">
                         <a href="{{ habit.url }}/edit">Edit</a>

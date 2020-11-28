@@ -23,13 +23,6 @@ a:hover { text-decoration: none; }
     color: #f1f1f1;
 }
 .menu-buttons-container button:focus{
-    background-color: #7cbb5d;
-    color: #f1f1f1;
-    outline: 0;
-}
-.menu-buttons-container button:visited{
-    background-color: #7cbb5d;
-    color: #f1f1f1;
     outline: 0;
 }
 .menu-active-button{
@@ -79,7 +72,6 @@ a:hover { text-decoration: none; }
 }
 .habit-progress-bar{
     color: #7cbb5d;
-    font-size: 9em;
 }
 .habit-more-statistic{
 
@@ -98,75 +90,6 @@ a:hover { text-decoration: none; }
 }
 .non-actual  .habit-progress-bar{
     color: #888;
-}
-/*
-    PROGRESS BAR in Habit's Screen
- */
-.pie-wrapper.progress-45 .pie .left-side {
-    -webkit-transform: rotate(162deg);
-    transform: rotate(162deg);
-}
-.pie-wrapper.progress-45 .pie .right-side {
-    display: none;
-}
-.pie-wrapper {
-    height: 1em;
-    width: 1em;
-    float: left;
-    margin: 15px 0;
-    position: relative;
-}
-.pie-wrapper .pie {
-    height: 100%;
-    width: 100%;
-    clip: rect(0, 1em, 1em, 0.5em);
-    left: 0;
-    position: absolute;
-    top: 0;
-}
-.pie-wrapper .pie .half-circle {
-    height: 100%;
-    width: 100%;
-    border: 0.1em solid #7cbb5d;
-    border-radius: 50%;
-    clip: rect(0, 0.5em, 1em, 0);
-    left: 0;
-    position: absolute;
-    top: 0;
-}
-.pie-wrapper .label {
-    background: #34495e;
-    border-radius: 50%;
-    bottom: 0.4em;
-    color: #ecf0f1;
-    cursor: default;
-    display: block;
-    font-size: 0.25em;
-    left: 0.4em;
-    line-height: 2.8em;
-    position: absolute;
-    right: 0.4em;
-    text-align: center;
-    top: 0.4em;
-}
-.pie-wrapper .label .smaller {
-    color: #bdc3c7;
-    font-size: .45em;
-    padding-bottom: 20px;
-    vertical-align: super;
-}
-.pie-wrapper .shadow {
-    height: 100%;
-    width: 100%;
-    border: 0.1em solid #bdc3c7;
-    border-radius: 50%;
-}
-.pie-wrapper.style-2 .label {
-    background: none;
-    color: #7f8c8d;
-}
-.pie-wrapper.style-2 .label .smaller {
-    color: #bdc3c7;
 }
 
 /*
