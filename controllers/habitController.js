@@ -4,7 +4,7 @@ exports.habitList = function (req, res) {
 
     let user = req.currentUser;
 
-    Habit.find({user: user._id})
+    Habit.find({user: user._id}).sort({isActual: -1})
         .exec(function (err, habits) {
             if (err) {
                 console.log(err);
