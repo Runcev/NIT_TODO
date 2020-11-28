@@ -31,6 +31,18 @@
 .under-info-container{
     text-align: center;
 }
+.non-actual .pie-wrapper .pie .half-circle {
+    border: 0.1em solid #888;
+}
+.non-actual .pie-wrapper.style-2 .label .smaller {
+    color: #888;
+}
+.non-actual .habit-big-num{
+    color: #888;
+}
+.non-actual  .habit-progress-bar{
+    color: #888;
+}
 /*
     PROGRESS BAR in Habit's Screen
  */
