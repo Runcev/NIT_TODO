@@ -2,20 +2,24 @@
 
 {% block body %}
 
+<div class = "entity-detail-frame" >
+    <h3 class = "name-entity-detail-frame">{{ entity.name }}</h3>
 
-    <h3>{{ entity.name }}</h3>
 
+    <details class="fix-fucking-frame">
+        <summary class = "style-for-entity-detail-list"> Scheduler</summary>
 
-    <h3>Scheduler</h3>
+        {% for event in events %}
+           <div class = "events-in-list-style" > • {{ event.date|date('d.m.Y') }} {{ event.name }}</div>
+        {% endfor %}
+    </details>
 
-    {% for event in events %}
-        {{ event.date|date('d.m.Y') }} {{ event.name }}<br>
-    {% endfor %}
+    <details class="fix-fucking-frame">
+        <summary class = "style-for-entity-detail-list"> Deadline</summary>
+        {% for deadline in deadlines %}
+        <div class = "events-in-list-style" > • {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
+        {% endfor %}
+    </details>
 
-    <h3>Deadline</h3>
-
-    {% for deadline in deadlines %}
-        {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}<br>
-    {% endfor %}
-
+</div>
 {% endblock %}
