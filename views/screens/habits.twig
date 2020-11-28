@@ -3,25 +3,35 @@
 {% block body %}
 
     <h3>{{ title }}</h3>
-
+    <div class="container-fluid col-8" style="margin: 0px">
         {% for habit in habits %}
-           <div class="habit-container">
-               <div class="habit-name">
-                   {{ habit.name }}
-               </div>
-               <div class="habit-line">
+                <div class="habit-container row">
+                    <div class="habit-name col-12">
+                        {{ habit.name }}
+                    </div>
+                    <div class="habit-line col-12">
 
-               </div>
-               <div class="habit-big-num">
-                   {{ habit.counter }}
-               </div>
-               <div class="habit-progress-bar">
-                   {{ habit.thisMonthCounter }}
-               </div>
-               <div class="habit-more-statistic">
-                   {{ habit.moreStatisticUrl }}
-               </div>
-           </div>
+                    </div>
+                    <div class="habit-big-num col-3">
+                        {{ habit.counter }}
+                    </div>
+                    <div class="habit-progress-bar col-3">
+
+                        <div class="pie-wrapper progress-45 style-2">
+                            <span class="label">   {{ habit.thisMonthCounter/habit.thisMonthTargetCount*100 }}<span class="smaller">%</span></span>
+                            <div class="pie">
+                                <div class="left-side half-circle"></div>
+                                <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                        </div>
+
+                    </div>
+                    <div class="habit-more-statistic col-3">
+                        {{ habit.moreStatisticUrl }}
+                </div>
+            </div>
         {% endfor %}
+    </div>
 
 {% endblock %}
