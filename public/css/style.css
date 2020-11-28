@@ -104,11 +104,20 @@ a:hover { text-decoration: none; }
     border: 2px solid #ff9534;
     border-radius: 15px;
     padding: 10px;
+    position: relative;
 }
 
 .name-entity-detail-frame{
     color :#ff9534;
     padding-left: 15px;
+}
+
+.edit-icon-pos-set{
+    position: absolute;
+    float: right;
+    color :#ff9534;
+    top: 15px; /* Положение от нижнего края */
+    right: 15px; /* Положение от правого края */
 }
 
 .style-for-entity-detail-list{
