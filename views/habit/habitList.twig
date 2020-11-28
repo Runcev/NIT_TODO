@@ -14,12 +14,12 @@
 
                     </div>
                     <div class="habit-big-num col-3">
-                        21
+                        {{ habit.counter }}
                     </div>
                     <div class="habit-progress-bar col-4">
 
                         <div class="pie-wrapper progress-45 style-2">
-                            <span class="label">  45 <span class="smaller">%</span></span>
+                            <span class="label">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}<span class="smaller">%</span></span>
                             <div class="pie">
                                 <div class="left-side half-circle"></div>
                                 <div class="right-side half-circle"></div>
@@ -52,12 +52,12 @@
 
                     </div>
                     <div class="habit-big-num col-3">
-                        23
+                        {{ habit.counter }}
                     </div>
                     <div class="habit-progress-bar col-4">
 
                         <div class="pie-wrapper progress-45 style-2">
-                            <span class="label">   45<span class="smaller">%</span></span>
+                            <span class="label">{{ habit.thisMonthCounter/habit.thisMonthTargetCount*100 }}<span class="smaller">%</span></span>
                             <div class="pie">
                                 <div class="left-side half-circle"></div>
                                 <div class="right-side half-circle"></div>
