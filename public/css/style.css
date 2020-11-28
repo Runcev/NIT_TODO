@@ -20,6 +20,21 @@
     background-color: #7cbb5d;
     color: #f1f1f1;
 }
+.menu-buttons-container button:focus{
+    background-color: #7cbb5d;
+    color: #f1f1f1;
+    outline: 0;
+}
+.menu-buttons-container button:active{
+    background-color: #7cbb5d;
+    color: #f1f1f1;
+    outline: 0;
+}
+.menu-active-button{
+    background-color: #7cbb5d;
+    color: #f1f1f1;
+    outline: 0;
+}
 .circle-button{
     border-radius: 50%;
     width: 40px;
@@ -96,7 +111,7 @@
     height: 1em;
     width: 1em;
     float: left;
-    margin: 15px;
+    margin: 15px 0;
     position: relative;
 }
 .pie-wrapper .pie {
