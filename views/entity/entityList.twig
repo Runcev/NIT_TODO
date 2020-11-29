@@ -3,16 +3,14 @@
 {% block body %}
 
     {% for topic in topics %}
-        <h3 class="name-topic-header-style">{{ topic.name }}</h3> <a href="{{ topic.url }}/edit" data-toggle="tooltip" ><i class="far fa-edit "></i></a><br>
+        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="{{ topic.url }}/edit" data-toggle="tooltip" ><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a><br>
 
         <div class="entity-buttons-container">
         {% for entity in entities %}
-            {# Random color generator for buttons #}
-            {% set entityColor = random(['entity-ef534e', 'entity-ec407a', 'entity-ab47bc' , 'entity-7e57c2' , 'entity-5c6bc0' , 'entity-42a5f5' , 'entity-29b6f6' , 'entity-26c6da' , 'entity-26a69a' , 'entity-66bb6a' , 'entity-9ccc65' , 'entity-ffa726' , 'entity-ff7043']) %}
 
             {% if entity.topic.id == topic.id %}
 
-                <button type="button" class="rounded-button {{ entityColor }}" onclick="location.href='{{ entity.url }}'">
+                <button type="button" class="rounded-button" style="background-color: {{ entity.color.name }}" onclick="location.href='{{ entity.url }}'">
                     {{ entity.name }}
                 </button>
             {% endif %}
@@ -20,7 +18,7 @@
         {% endfor %}
             <!-- Button for add entity -->
             <div style="display: inline-block;">
-                <button class="circle-button"  data-toggle="modal" data-target="#addEntityModal">
+                <button class="circle-button"  data-toggle="modal" data-target="#addEntityModal" onclick="load_form('/entity/add/{{ topic.id }}', '#form_add_entity')">
                     +
                 </button>
             </div>
@@ -28,7 +26,7 @@
     {% endfor %}
     <!--onclick="location.href='/entity/add'" -->
     <div class="add-entity-buttons-container menu-buttons-container">
-        <button type="button"class="rounded-button" data-toggle="modal" data-target="#addTopicModal">
+        <button type="button"class="rounded-button" data-toggle="modal" data-target="#addTopicModal" onclick="load_form('/topic/add', '#form_add_topic')">
             Add topic
         </button>
     </div>
@@ -43,27 +41,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/entity/add" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
 
-                        <div class="form-group">
-                            <label>Topic</label>
-                            <select name="topic" class="form-control" required>
-                                {% for topic in topics %}
-                                    <option value="{{ topic.id }}" {% if topicId == topic.id %}selected{% endif %}>{{ topic.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-
-                <div class="modal-footer menu-buttons-container">
-                    <button type="submit" class="rounded-button">Save</button>
+                <div id="form_add_entity" style="margin: 10px">
+                    {# форму тянемо ajax #}
                 </div>
-                </form>
+
             </div>
         </div>
     </div>
@@ -77,28 +59,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/topic/add" method="post">
-                    <div class="modal-body">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <ul class='dropdown-menu'>
-                                    {% for user in users %}
-                                        <li>
-                                            <a href="#" data-id="{{user.getId() }}">
-                                                {{ user.name() }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                    </div>
-                    <div class="modal-footer  menu-buttons-container">
-                        <button type="submit" class="rounded-button">Save</button>
-                    </div>
-                </form>
+                <div id="form_add_topic" style="margin: 10px">
+                    {# форму тянемо ajax #}
+                </div>
             </div>
         </div>
     </div>
@@ -106,3 +69,22 @@
     <br><br>
 
 {% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        function load_form (url, target) {
+            $.ajax({
+                method: "GET",
+                url: url,
+                dataType: "html"
+            }).done(function( data ) {
+                $(target).html(data);
+            });
+        }
+    </script>
+
+{% endblock %}
+
