@@ -3,20 +3,30 @@
 {% block body %}
 
     {% for topic in topics %}
-        <h3>{{ topic.name }}</h3>
+        <h3 class="name-topic-header-style">{{ topic.name }}</h3> <a href="{{ topic.url }}/edit" data-toggle="tooltip" ><i class="far fa-edit "></i></a><br>
 
+        <div class="entity-buttons-container">
         {% for entity in entities %}
+            {# Random color generator for buttons #}
+            {% set entityColor = random(['entity-ef534e', 'entity-ec407a', 'entity-ab47bc' , 'entity-7e57c2' , 'entity-5c6bc0' , 'entity-42a5f5' , 'entity-29b6f6' , 'entity-26c6da' , 'entity-26a69a' , 'entity-66bb6a' , 'entity-9ccc65' , 'entity-ffa726' , 'entity-ff7043']) %}
 
             {% if entity.topic.id == topic.id %}
-                <a href="{{ entity.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a> <a href="{{ entity.url }}" title="Detail">{{ entity.name }}</a> <br>
+
+                <button type="button" id="calendarButton" class="rounded-button {{ entityColor }}" onclick="location.href='{{ entity.url }}'">
+                    {{ entity.name }}
+                </button>
             {% endif %}
 
         {% endfor %}
-
+        </div>
     {% endfor %}
 
-    <br><br>
+    <div class="add-entity-buttons-container">
+        <button type="button" id="calendarButton" style="" class="rounded-button" onclick="location.href='/entity/add'">
+            Add entity
+        </button>
+    </div>
 
-    <a href="/entity/add">Add entity</a>
+    <br><br>
 
 {% endblock %}

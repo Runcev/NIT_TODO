@@ -10,20 +10,18 @@
         <summary class = "style-for-entity-detail-list"> Scheduler</summary>
 
         {% for event in events %}
-           <div class = "events-in-list-style" > • {{ event.date|date('d.m.Y') }} {{ event.name }}</div>
+           <div class = "events-in-list-style" >• {{ event.date|date('d.m.Y') }} {{ event.name }}</div>
         {% endfor %}
+        <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}">+ Add event</a>
     </details>
-
-    <a href="/event/add/{{ entity.id }}">Add event</a>
 
     <details class="fix-frame">
         <summary class = "style-for-entity-detail-list"> Deadline</summary>
         {% for deadline in deadlines %}
-        <div class = "events-in-list-style" > • {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
+        <div class = "events-in-list-style" >• {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
         {% endfor %}
+        <a class = "events-in-list-style-a" href="/deadline/add/{{ entity.id }}">+ Add deadline</a>
     </details>
-
-    <a href="/deadline/add/{{ entity.id }}">Add deadline</a>
 
 </div>
 {% endblock %}
