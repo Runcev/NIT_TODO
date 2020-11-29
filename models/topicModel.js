@@ -9,6 +9,7 @@ var TopicSchema = new Schema(
     {
         name: {type: String, required: true, trim: true},
         user: {type: Number, ref: 'User', required: true},
+        color: {type: Number, ref: 'Color', required: true}
     }
 );
 

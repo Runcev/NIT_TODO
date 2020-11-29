@@ -1,5 +1,6 @@
 var Topic = require('../models/topicModel');
 var Entity = require('../models/entityModel');
+var Color = require('../models/colorModel');
 
 exports.topicList = function (req, res) {
 
@@ -52,17 +53,24 @@ exports.topicDetail = function (req, res) {
 
 // виводимо форму для створення нового запису
 exports.topicAddGet = function (req, res) {
-    res.render('topic/topicAdd', {title: 'Add topic'});
+
+    Color.find({})
+        .exec(function (err, colors) {
+            if (err) console.log(err);
+
+            res.render('topic/topicAdd', {title: 'Add topic', colors: colors});
+        });
 }
 
 exports.topicAdd = function (req, res) {
 
     let name = req.body.name;
+    let color = req.body.color;
 
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
 
-    var topic = new Topic({name: name, user: user});
+    var topic = new Topic({name: name, user: user, color: color});
 
     topic.save(function(err){
         if(err) console.log.err;
@@ -85,20 +93,26 @@ exports.topicEdit = function (req, res) {
             if (err) console.log(err);
         }
 
-        res.render('topic/topicEdit', {title: 'Edit topic', topic: topic});
+        Color.find({})
+            .exec(function (err, colors) {
+                if (err) console.log(err);
+
+                res.render('topic/topicEdit', {title: 'Edit topic', topic: topic, colors: colors});
+            });
     });
 };
 
 exports.topicUpdate = function (req, res) {
     
     let name = req.body.name;
+    let color = req.body.color;
 
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
 
-    var topic = new Topic({name: name, user: user, _id: req.params.id});
+    var topic = new Topic({name: name, user: user, color: color, _id: req.params.id});
 
-    Topic.findByIdAndUpdate(req.params.id, topic, {}, function(err,topic){
+    Topic.findByIdAndUpdate(req.params.id, topic, {}, function(err, topic){
         if(err) console.log(err);
 
         if (req.baseUrl.match(/api/)) {

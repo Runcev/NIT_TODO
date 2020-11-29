@@ -2,18 +2,19 @@ var Entity = require('../models/entityModel');
 var Topic = require('../models/topicModel');
 var Event = require('../models/eventModel');
 var Deadline = require('../models/deadlineModel');
+var Color = require('../models/colorModel');
 
 exports.entityList = function (req, res) {
 
     let user = req.currentUser;
 
-    Entity.find({user: user._id}).populate('topic')
+    Entity.find({user: user._id}).populate('topic').populate('color')
         .exec(function (err, entities) {
             if (err) {
                 return next(err);
             }
 
-            Topic.find({user: user._id})
+            Topic.find({user: user._id}).populate('color')
                 .exec(function (err, topics) {
                     if (err) {
                         console.log(err);
@@ -33,7 +34,7 @@ exports.entityDetail = function (req, res) {
     let user = req.currentUser;
     let entityId = req.params.id;
 
-    Entity.find({user: user._id, _id: entityId})
+    Entity.find({user: user._id, _id: entityId}).populate('color')
         .exec(function (err, entity) {
             if (err) console.log(err);
 
@@ -68,7 +69,12 @@ exports.entityAddGet = function (req, res) {
         .exec(function (err, topics) {
             if (err) console.log(err);
 
-            res.render('entity/entityAdd', {title: 'Add entity', topics: topics, topicId: topicId});
+            Color.find({})
+                .exec(function (err, colors) {
+                    if (err) console.log(err);
+
+                    res.render('entity/entityAdd', {title: 'Add entity', topics: topics, topicId: topicId, colors: colors});
+                });
         });
 }
 
@@ -76,9 +82,10 @@ exports.entityAdd = function (req, res) {
 
     let name = req.body.name;
     let topic = req.body.topic;
+    let color = req.body.color;
     let user = req.currentUser;
 
-    var entity = new Entity({name: name, topic: topic, user: user});
+    var entity = new Entity({name: name, topic: topic, user: user, color: color});
 
     entity.save(function(err){
         if(err) console.log(err);
@@ -108,7 +115,12 @@ exports.entityEdit = function (req, res) {
             .exec(function (err, topics) {
                 if (err) console.log(err);
 
-                res.render('entity/entityEdit', {title: 'Edit entity', entity: entity, topics: topics});
+                Color.find({})
+                    .exec(function (err, colors) {
+                        if (err) console.log(err);
+
+                        res.render('entity/entityEdit', {title: 'Edit entity', entity: entity, topics: topics, colors: colors});
+                    });
             });
     });
 };
@@ -117,8 +129,9 @@ exports.entityUpdate = function (req, res) {
 
     let name = req.body.name;
     let topic = req.body.topic;
+    let color = req.body.color;
 
-    var entity = new Entity({name: name, topic: topic, _id: req.params.id});
+    var entity = new Entity({name: name, topic: topic, color: color, _id: req.params.id});
 
     Entity.findByIdAndUpdate(req.params.id, entity, {}, function(err, entity){
         if(err) console.log(err);
@@ -126,7 +139,7 @@ exports.entityUpdate = function (req, res) {
         if (req.baseUrl.match(/api/)) {
             res.send('');
         } else {
-            res.redirect('/entity');
+            res.redirect('/entity/'+entity._id);
         }
     });
 };

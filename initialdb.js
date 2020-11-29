@@ -23,10 +23,12 @@ var Deadline = require('./models/deadlineModel');
 var Event = require('./models/eventModel');
 var Todo = require('./models/todoModel');
 var Habit = require('./models/habitModel');
+var Color = require('./models/colorModel');
 
 var users = [];
 var entities = [];
 var topics = [];
+var colors = [];
 
 function userCreate(name, email, password, cb) {
 
@@ -92,9 +94,9 @@ function createDeadlines(cb) {
         cb);
 }
 
-function entityCreate(name, user, topic, cb) {
+function entityCreate(name, user, topic, color, cb) {
 
-    var entity = new Entity({name: name, user: user, topic: topic});
+    var entity = new Entity({name: name, user: user, topic: topic, color: color});
 
     entity.save(function (err) {
 
@@ -112,25 +114,49 @@ function createEntities(cb) {
 
     async.series([
             function (callback) {
-                entityCreate('Java', users[0], topics[0], callback);
+                entityCreate('Java', users[0], topics[0], colors[0], callback);
             },
             function (callback) {
-                entityCreate('C++', users[0], topics[0], callback);
+                entityCreate('C++', users[0], topics[0], colors[7], callback);
             },
             function (callback) {
-                entityCreate('C#', users[0], topics[0], callback);
+                entityCreate('C#', users[0], topics[0], colors[9], callback);
             },
             function (callback) {
-                entityCreate('Swimming', users[0], topics[1], callback);
+                entityCreate('JavaScript', users[0], topics[0], colors[1], callback);
+            },
+            function (callback) {
+                entityCreate('Haskell', users[0], topics[0], colors[10], callback);
+            },
+            function (callback) {
+                entityCreate('Mobile Dev', users[0], topics[0], colors[2], callback);
+            },
+            function (callback) {
+                entityCreate('Math', users[0], topics[0], colors[12], callback);
+            },
+            function (callback) {
+                entityCreate('DataBases', users[0], topics[0], colors[5], callback);
+            },
+            function (callback) {
+                entityCreate('Artificial Intelligence', users[0], topics[0], colors[8], callback);
+            },
+            function (callback) {
+                entityCreate('Swimming', users[0], topics[1], colors[11], callback);
+            },
+            function (callback) {
+                entityCreate('Tennis', users[0], topics[1], colors[3], callback);
+            },
+            function (callback) {
+                entityCreate('Volleyball', users[0], topics[1], colors[6], callback);
             },
         ],
         // optional callback
         cb);
 }
 
-function topicCreate(name, user, cb) {
+function topicCreate(name, user, color, cb) {
 
-    var topic = new Topic({name: name, user: user});
+    var topic = new Topic({name: name, user: user, color: color});
 
     topic.save(function (err) {
 
@@ -147,10 +173,10 @@ function createTopics(cb) {
 
     async.series([
             function (callback) {
-                topicCreate('University', users[0], callback);
+                topicCreate('University', users[0], colors[10], callback);
             },
             function (callback) {
-                topicCreate('Sport', users[0], callback);
+                topicCreate('Sport', users[0], colors[0], callback);
             },
         ],
         // optional callback
@@ -271,6 +297,69 @@ function createTodos(cb) {
         cb);
 }
 
+function colorCreate(name, cb) {
+
+    var color = new Color({name: name});
+
+    color.save(function (err) {
+
+        if (err) console.log(err);
+
+        colors.push(color);
+
+        cb(null, true);
+    });
+}
+
+function createColors(cb) {
+
+    console.log('colors create');
+
+    async.series([
+            function (callback) {
+                colorCreate('#ef534e', callback);
+            },
+            function (callback) {
+                colorCreate('#ec407a', callback);
+            },
+            function (callback) {
+                colorCreate('#ab47bc', callback);
+            },
+            function (callback) {
+                colorCreate('#7e57c2', callback);
+            },
+            function (callback) {
+                colorCreate('#5c6bc0', callback);
+            },
+            function (callback) {
+                colorCreate('#42a5f5', callback);
+            },
+            function (callback) {
+                colorCreate('#29b6f6', callback);
+            },
+            function (callback) {
+                colorCreate('#26c6da', callback);
+            },
+            function (callback) {
+                colorCreate('#26a69a', callback);
+            },
+            function (callback) {
+                colorCreate('#66bb6a', callback);
+            },
+            function (callback) {
+                colorCreate('#9ccc65', callback);
+            },
+            function (callback) {
+                colorCreate('#ffa726', callback);
+            },
+            function (callback) {
+                colorCreate('#ff7043', callback);
+            },
+        ],
+        // optional callback
+        cb);
+}
+
 function deleteAll(cb) {
     async.series([
             function (callback) {
@@ -308,6 +397,11 @@ function deleteAll(cb) {
                     callback(null, true)
                 });
             },
+            function (callback) {
+                Color.deleteMany({}, () => {
+                    callback(null, true)
+                });
+            },
         ],
         cb
     );
@@ -316,6 +410,7 @@ function deleteAll(cb) {
 async.series([
         deleteAll,
         createUsers,
+        createColors,
         createTopics,
         createEntities,
         createEvents,

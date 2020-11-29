@@ -12,6 +12,7 @@ var EntitySchema = new Schema(
         user: {type: Number, ref: 'User', required: true},
         // типи сутностей теж повинні бути цього користувача
         topic: {type: Number, ref: 'Topic'},
+        color: {type: Number, ref: 'Color', required: true}
     }
 );
 
