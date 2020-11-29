@@ -166,7 +166,7 @@ Entity list style
 }
 
 .entity-buttons-container :first-child{
-    margin-left: 30px;
+    margin-left: 15px;
 }
 
 .entity-buttons-container button{
@@ -243,4 +243,13 @@ Entity list style
 }
 .entity-buttons-container button:focus{
     outline: 0;
+}
+.entity-buttons-container div button{
+    color: #7cbb5d;
+    transition: background-color 0.35s linear;
+    margin-left: 0 !important;
+}
+.entity-buttons-container div button:hover{
+    color: whitesmoke;
+    background-color: #7cbb5d;
 }

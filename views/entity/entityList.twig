@@ -12,19 +12,95 @@
 
             {% if entity.topic.id == topic.id %}
 
-                <button type="button" id="calendarButton" class="rounded-button {{ entityColor }}" onclick="location.href='{{ entity.url }}'">
+                <button type="button" class="rounded-button {{ entityColor }}" onclick="location.href='{{ entity.url }}'">
                     {{ entity.name }}
                 </button>
             {% endif %}
 
         {% endfor %}
+            <!-- Button for add entity -->
+            <div style="display: inline-block;">
+                <button class="circle-button"  data-toggle="modal" data-target="#addEntityModal">
+                    +
+                </button>
+            </div>
         </div>
     {% endfor %}
-
-    <div class="add-entity-buttons-container">
-        <button type="button" id="calendarButton" style="" class="rounded-button" onclick="location.href='/entity/add'">
-            Add entity
+    <!--onclick="location.href='/entity/add'" -->
+    <div class="add-entity-buttons-container menu-buttons-container">
+        <button type="button" style="" class="rounded-button" data-toggle="modal" data-target="#addTopicModal">
+            Add topic
         </button>
+    </div>
+
+    <!-- Модальне вікно для addEntity -->
+    <div class="modal fade" id="addEntityModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"> Add New Entity </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/entity/add" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Topic</label>
+                            <select name="topic" class="form-control" required>
+                                {% for topic in topics %}
+                                    <option value="{{ topic.id }}" {% if topicId == topic.id %}selected{% endif %}>{{ topic.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                <div class="modal-footer menu-buttons-container">
+                    <button type="submit" class="rounded-button">Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Модальне вікно для addTopic -->
+    <div class="modal fade" id="addTopicModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"> Add New Topic </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/topic/add" method="post">
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <ul class='dropdown-menu'>
+                                    {% for user in users %}
+                                        <li>
+                                            <a href="#" data-id="{{user.getId() }}">
+                                                {{ user.name() }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                    </div>
+                    <div class="modal-footer  menu-buttons-container">
+                        <button type="submit" class="rounded-button">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <br><br>
