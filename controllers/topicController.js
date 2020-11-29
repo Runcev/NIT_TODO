@@ -71,7 +71,7 @@ exports.topicAdd = function (req, res) {
     if (req.baseUrl.match(/api/)) {
         res.send('');
     } else {
-        res.redirect('/topic');
+        res.redirect('/entity');
     }
 };
 
@@ -104,7 +104,7 @@ exports.topicUpdate = function (req, res) {
         if (req.baseUrl.match(/api/)) {
             res.send('');
         } else {
-            res.redirect('/topic');
+            res.redirect('/entity');
         }
     });
 };

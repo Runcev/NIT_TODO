@@ -138,10 +138,8 @@
 
         if (window.location.href.match(/habit/)) {
             document.getElementById("habitsButton").classList.add('menu-active-button');
-        } else if (window.location.href.match(/entity/)) {
+        } else if (window.location.href.match(/entity/) || window.location.href.match(/topic/)) {
             document.getElementById("entitiesButton").classList.add('menu-active-button');
-        } else if (window.location.href.match(/topic/)) {
-            document.getElementById("topicButton").classList.add('menu-active-button');
         } else if (window.location.href.match(/event\/add/)) {
             document.getElementById("addEvent").classList.add('menu-active-button');
         } else if (!window.location.href.match(/deadline/) && !window.location.href.match(/todo/)) {
