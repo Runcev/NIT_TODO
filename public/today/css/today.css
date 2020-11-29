@@ -1,0 +1,89 @@
+/*
+
+*/
+.rightF
+{
+    float: right;
+    margin-top: 50px;
+
+}
+.today-font
+{
+    font-size: 150%;
+    text-align: center;
+    color: #7cbb5d;
+}
+.submenu
+{
+    font-size: 120%;
+    text-align: center;
+}
+
+li
+{
+    list-style-type: none;
+    font-size: 100%;
+    text-align: center;
+
+}
+li:hover
+{
+    cursor: default;
+    border-radius: 7px;
+    background-color: #dce3dc;
+    transition: all 500ms ease
+}
+li.checked {
+    text-decoration: line-through;
+    border-radius: 7px;
+}
+
+li.checked::before {
+    position: absolute;
+    border-style: solid;
+    border-radius: 7px;
+}
+dt.checked {
+    text-decoration: line-through;
+    border-radius: 7px;
+}
+dt.checked::before {
+    position: absolute;
+    border-style: solid;
+    border-radius: 7px;
+}
+dt
+{
+    font-size: 120%;
+    color: white;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #7cbb5d;
+}
+
+
+/*
+dd
+{
+ font-size: 120%;
+ text-align: center;
+}
+ dd:hover
+{
+ border-radius: 7px;
+ background-color: #dce3dc;
+ transition: all 500ms ease
+}
+dd.checked {
+ text-decoration: line-through;
+ border-radius: 7px;
+}
+dd.checked::before {
+ position: absolute;
+ border-style: solid;
+ border-radius: 7px;
+}
+
+*/
+
+

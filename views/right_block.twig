@@ -1,10 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="today/css/today.css">
+    <style>
+        i {
+            font-size: 20px;
+            margin: 5px;
+        }
+    </style>
 
-<div style="border: 1px solid grey; margin: 0 0 0 10px">
-    Права менюшка<br>
+</head>
+<body>
 
-    Calendar <br>
-    <br>
-    Habits<br>
-    <br>
-    To Do
-</div>
+
+
+<main id="main_container" role="main" class="container" style="margin-top: 10px">
+    <!--
+    <div class="rightF">
+        <h1 class = "today-font" > Today </h1>
+        <dl>
+            <dt>Calendar</dt>
+            <dd>Front End</dd>
+            <dt>Habits</dt>
+             <dd>Reading</dd>
+            <dt>To do</dt>
+            <dd>Buy coffee</dd>
+        </dl>
+    </div>
+-->
+    <div class="rightF point"> <!--позиція -->
+        <h1 class = "today-font" > Today </h1>
+        <dl class ="">
+            <dt>Calendar</dt>
+            <dd> <ul class="submenu">
+                    <li></li>
+                    <li>BackEnd</li>
+                </ul>
+            </dd>
+
+            <dt>Habits</dt>
+            <dd> <ul class="submenu">
+                    <li>FrontEnd</li>
+                    <li>BackEnd</li>
+                </ul>
+            </dd>
+            <dt>To do</dt>
+            <dd><ul class="submenu">
+                    <li>FrontEnd</li>
+                    <li>BackEnd</li>
+                </ul>
+            </dd>
+        </dl>
+
+    </div>
+    {% block body %}
+
+    {% endblock %}
+
+</main>
+
+{% block javascripts %}
+
+    <script src="today/js/today.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+{% endblock %}x
+
+</body>
+</html>
