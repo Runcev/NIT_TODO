@@ -4,6 +4,10 @@
 
 a:hover { text-decoration: none; }
 
+i {
+    font-size: 20px;
+    margin: 5px;
+}
 /*
   Menu Buttons Style
 */
@@ -175,6 +179,7 @@ Entity list style
     font-weight: bold;
     display: inline-block;
     transition: background-color 0.3s linear;
+    margin: 5px 0;
 }
 
 .entity-buttons-container button:hover{
@@ -182,46 +187,6 @@ Entity list style
 }
 .entity-buttons-container button:focus{
     outline: 0;
-}
-
-.entity-ef534e{
-    background-color: #ef534e;
-}
-.entity-ec407a{
-    background-color: #ec407a;
-}
-.entity-ab47bc{
-    background-color: #8e24aa;
-}
-.entity-7e57c2{
-    background-color: #5e35b1;
-}
-.entity-5c6bc0{
-    background-color: #5c6bc0;
-}
-.entity-42a5f5{
-    background-color: #42a5f5;
-}
-.entity-29b6f6{
-    background-color: #29b6f6;
-}
-.entity-26c6da{
-    background-color: #26c6da;
-}
-.entity-26a69a{
-    background-color: #26a69a;
-}
-.entity-66bb6a{
-    background-color: #66bb6a;
-}
-.entity-9ccc65{
-    background-color: #9ccc65;
-}
-.entity-ffa726{
-    background-color: #ffa726;
-}
-.entity-ff7043{
-    background-color: #ff7043;
 }
 
 .add-entity-buttons-container{
