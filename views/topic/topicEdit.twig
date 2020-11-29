@@ -10,8 +10,25 @@
             <label>Name</label>
             <input type="text" name="name" value="{{ topic.name }}" class="form-control">
         </div>
+        <div class="form-group">
+            <label>Color</label>
+            <select id="select_color" name="color" class="form-control" onchange="$(this).css('background-color', $('#select_color option:selected').html());" required>
+                {% for color in colors %}
+                    <option value="{{ color.id }}" style="background-color: {{ color.name }}" {% if topic.color == color.id %}selected{% endif %}>{{ color.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
 {% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>$('#select_color').css('background-color', $('#select_color option:selected').html());</script>
+
+{% endblock %}
+
