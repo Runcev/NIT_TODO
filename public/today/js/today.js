@@ -7,4 +7,6 @@ list.addEventListener('click', function(ev) {
       document.querySelectorAll('li').toggle('checked');
     }
 }, false);
+//наявна проблема з 6-9 строки
+
 
