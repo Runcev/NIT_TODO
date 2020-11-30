@@ -176,17 +176,17 @@ function createTopics(cb) {
                 topicCreate('University', users[0], colors[10], callback);
             },
             function (callback) {
-                topicCreate('Sport', users[0], colors[0], callback);
+                topicCreate('Sport', users[0], colors[12], callback);
             },
         ],
         // optional callback
         cb);
 }
 
-function eventCreate(name, date, timeStart, timeEnd, entity, user, place, about, cb) {
+function eventCreate(name, timeStart, timeEnd, entity, user, place, about, cb) {
 
     var event = new Event({
-        name: name, date:date, timeStart:timeStart, timeEnd:timeEnd,
+        name: name, timeStart:timeStart, timeEnd:timeEnd,
         entity: entity, user: user, place:place, about: about});
 
     event.save(function (err) {
@@ -199,9 +199,8 @@ function eventCreate(name, date, timeStart, timeEnd, entity, user, place, about,
 
 /*
     name: {type: String, required: true, trim: true},
-    date: { type: Date, required: true, default: Date.now },
-    timeStart: { type: String, required: true, trim: true},
-    timeEnd: { type: String, required: true, trim: true},
+    timeStart: { type: Date, required: true},
+    timeEnd: { type: Date, required: true},
     entity: {type: Schema.ObjectId, ref: 'Entity', required: true},
     user: {type: Schema.ObjectId, ref: 'User', required: true},
     place: {type: String, trim: true},
@@ -213,16 +212,46 @@ function createEvents(cb) {
 
     async.series([
             function (callback) {
-                eventCreate('Java (lection)', '2020-11-20T08:30Z', '8:30', '10:50', entities[0], users[0], 'online', 'comment', callback);
+                eventCreate('Lection', '2020-11-30T08:30', '2020-11-30T09:50', entities[0], users[0], 'online', 'comment', callback);
             },
             function (callback) {
-                eventCreate('Java (practice)', '2020-11-21T10:00Z', '10:00', '11:20', entities[0], users[0], 'online', 'comment', callback);
+                eventCreate('Practice', '2020-11-30T11:40', '2020-11-30T13:30', entities[0], users[0], 'online', 'comment', callback);
             },
             function (callback) {
-                eventCreate('C++ (practice)', '2020-11-22T10:00Z', '10:00', '11:20', entities[1], users[0], 'online', 'comment', callback);
+                eventCreate('Practice', '2020-11-30T15:00', '2020-11-30T16:20', entities[1], users[0], 'online', 'comment', callback);
             },
             function (callback) {
-                eventCreate('C++ (lection)', '2020-11-23T10:00Z', '10:00', '11:20', entities[1], users[0], 'online', 'comment', callback);
+                eventCreate('Lection', '2020-11-30T16:30', '2020-11-30T17:50', entities[1], users[0], 'online', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Lection', '2020-12-01T08:30', '2020-12-01T09:50', entities[2], users[0], 'online', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Practice', '2020-12-01T11:40', '2020-12-01T13:30', entities[2], users[0], 'online', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Practice', '2020-12-01T15:00', '2020-12-01T16:20', entities[3], users[0], 'online', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Lection', '2020-12-04T16:30', '2020-12-04T17:50', entities[3], users[0], 'online', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Training', '2020-12-04T19:00', '2020-12-04T20:30', entities[10], users[0], 'Cort', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Training', '2020-12-05T08:00', '2020-12-05T09:30', entities[9], users[0], 'Pool', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Game', '2020-12-02T17:00', '2020-12-02T19:30', entities[11], users[0], 'Park', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Training', '2020-12-08T19:00', '2020-12-08T20:30', entities[10], users[0], 'Cort', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Training', '2020-12-03T08:00', '2020-12-03T09:30', entities[9], users[0], 'Pool', 'comment', callback);
+            },
+            function (callback) {
+                eventCreate('Game', '2020-12-03T17:00', '2020-12-03T19:30', entities[11], users[0], 'Park', 'comment', callback);
             },
         ],
         // optional callback
