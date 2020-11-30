@@ -1,5 +1,10 @@
 {% extends 'layout.twig' %}
 
+{% block othercss %}
+    <link rel="stylesheet/less" type="text/css" href="/css/st.less" />
+    <script src="//cdn.jsdelivr.net/npm/less" ></script>
+{% endblock %}
+
 {% block body %}
 
     <h3>{{ title }}</h3>
@@ -74,3 +79,5 @@
     </div>
 
 {% endblock %}
+
+

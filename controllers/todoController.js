@@ -49,7 +49,7 @@ exports.todoAdd = function (req, res) {
     if (req.baseUrl.match(/api/)) {
         res.send('');
     } else {
-        res.redirect('/todo');
+        res.redirect('/');
     }
 };
 

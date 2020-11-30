@@ -68,23 +68,3 @@
     <br><br>
 
 {% endblock %}
-{#
-{% block javascripts %}
-
-    {{ parent() }}
-
-    <script>
-        function load_form (url, target) {
-            $.ajax({
-                method: "GET",
-                url: url,
-                dataType: "html"
-            }).done(function( data ) {
-                $(target).html(data);
-            });
-        }
-    </script>
-
-{% endblock %}
-
- #}
