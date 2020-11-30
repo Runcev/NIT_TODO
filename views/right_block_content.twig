@@ -1,0 +1,130 @@
+<style>
+
+    .rightF
+    {
+        float: right;
+        margin-top: 50px;
+
+    }
+    .today-font
+    {
+        font-size: 150%;
+        text-align: center;
+        color: #7cbb5d;
+    }
+    .submenu
+    {
+        font-size: 120%;
+        text-align: center;
+    }
+
+    li
+    {
+        list-style-type: none;
+        font-size: 100%;
+        text-align: center;
+
+    }
+    li:hover
+    {
+        cursor: default;
+        border-radius: 7px;
+        background-color: #dce3dc;
+        transition: all 500ms ease
+    }
+    li.checked {
+        text-decoration: line-through;
+        border-radius: 7px;
+    }
+
+    li.checked::before {
+        position: absolute;
+        border-style: solid;
+        border-radius: 7px;
+    }
+    dt.checked {
+        text-decoration: line-through;
+        border-radius: 7px;
+    }
+    dt.checked::before {
+        position: absolute;
+        border-style: solid;
+        border-radius: 7px;
+    }
+    dt
+    {
+        font-size: 120%;
+        color: white;
+        text-align: center;
+        border-radius: 7px;
+        background-color: #7cbb5d;
+    }
+</style>
+
+    <div class="rightF point"> <!--позиція -->
+        <div class>
+            <h3 class = "today"> Today</h3>
+        
+            <details open class="fix-frame">
+                <summary class = "style-for-today-detail-list">Calendar <a>&#128197;</a></summary>
+
+                {% for event in events %}
+
+                    {% if event.date|date('Y-m-d H:i') <= date()|date('Y-m-d H:i')
+                    and event.date|date('Y-m-d') == date()|date('Y-m-d')  %}
+                        <li>
+                            {{ event.name }}
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+
+            </details>
+
+            <details open class="fix-frame">
+                <summary class = "style-for-today-detail-list">Habits <a>&#x1f4aa;</a></summary>
+
+            
+                {% for habit in habits %}
+                    <li>
+                        <input type="checkbox"/>
+                          {{ habit.name }}
+                    </li>
+                {% endfor %}
+
+            </details>
+
+            <details open class="fix-frame">
+                <summary class = "style-for-today-detail-list"> To do <a>&#9989;</a> </summary>
+                {% for todo in todos %}
+                    <li>
+                        <input type="checkbox"/>
+                        {{todo.name}}
+                    </li>
+                {% endfor %}
+            </details>
+
+            <div style="display: inline-block;">
+                    <button class="circle-button"  data-toggle="modal" data-target="#addTodoModal" onclick="load_form('/todo/add/{{ todo.id }}', '#form_add_todo')">
+                        +
+                    </button>
+            </div>
+
+            <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalLabel"> Add new Todo </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="form_add_todo" style="margin: 10px">
+                            {# форму тянемо ajax #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
