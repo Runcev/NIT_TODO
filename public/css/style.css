@@ -216,17 +216,31 @@ Entity list style
 }
 
 .add-new-topic-style{
-    background-color: white;
+    background-color: #00000000;
     transition: color 0.3s linear;
     color:  #7cbb5d;
     border: 0;
 }
 
 .add-new-topic-style :hover{
-    background-color: white;
+    background-color: #00000000;
     color: green;
 }
 
-.add-new-topic-style :focus{
+.add-new-eventOrdeadline-style :focus{
+    outline: 0;
+}
+
+.add-new-eventOrdeadline-style{
+    background-color: #00000000;
+    transition: color 0.3s linear;
+    border: 0;
+}
+
+.add-new-eventOrdeadline-style :hover{
+    background-color: #00000000;
+}
+
+.add-new-eventOrdeadline-style :focus{
     outline: 0;
 }

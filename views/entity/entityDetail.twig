@@ -12,7 +12,10 @@
         {% for event in events %}
            <div class = "events-in-list-style" >• {{ event.date|date('d.m.Y') }} {{ event.name }}</div>
         {% endfor %}
-        <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add event</a>
+       <!-- <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add event</a> -->
+        <button class="add-new-eventOrdeadline-style" style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addEntityModal" onclick="load_form('/entity/add/{{ topic.id }}', '#form_add_entity')">
+            + Add event
+        </button>
     </details>
 
     <details class="fix-frame">
@@ -20,7 +23,10 @@
         {% for deadline in deadlines %}
         <div class = "events-in-list-style" >• {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
         {% endfor %}
-        <a class = "events-in-list-style-a" href="/deadline/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add deadline</a>
+        <!--  <a class = "events-in-list-style-a" href="/deadline/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add deadline</a> -->
+        <button class="add-new-eventOrdeadline-style" style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addEntityModal" onclick="load_form('/entity/add/{{ topic.id }}', '#form_add_entity')">
+            + Add deadline
+        </button>
     </details>
 
 </div>
