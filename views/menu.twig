@@ -1,27 +1,20 @@
 
-<!--
-<div style="border: 1px solid grey; margin: 10px 0">
-    Тут буде менюшка з кнопками з Figma<br> <br>
-
-    <a href="/habit/view">Habits</a>
-
-    <br>
-</div>
--->
-
 <div class="menu-buttons-container">
-    <button id="addEvent" class="circle-button" data-toggle="modal" data-target="#addEventModal">
+    <button id="addEvent" class="circle-button" data-toggle="modal" data-target="#addEventModal" onclick="load_form('/event/add/{{ entity.id }}', '#form_add_event')">
         +
     </button>
     <button type="button" id="calendarButton" class="rounded-button" onclick="location.href='/'">
         Calendar
     </button>
+    <!--
     <button id="weekView" class="circle-button">
         W
     </button>
     <button id="monthView" class="circle-button">
         M
     </button>
+
+    -->
     <button type="button" id="habitsButton" class="rounded-button"  onclick="location.href='/habit'">
         Habits
     </button>
@@ -40,49 +33,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/event/add" method="post">
-                <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input type="date" name="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Time start (hh:mm)</label>
-                            <input type="time" name="timeStart" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Time end (hh:mm)</label>
-                            <input type="time" name="timeEnd" class="form-control" required>
-                        </div>
 
-                        <div class="form-group">
-                            <label>Entity</label>
-                            <select name="entity" class="form-control" required>
-                                {% for entity in entities %}
-                                    <option value="{{ entity.id }}" {% if entityId == entity.id %}selected{% endif %}>{{ entity.name }} ({{ entity.topic.name }})</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+            <div id="form_add_event" style="margin: 10px">
+                {# форму тянемо ajax #}
+            </div>
 
-                        <div class="form-group">
-                            <label>Place</label>
-                            <input type="text" name="place" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>About</label>
-                            <input type="text" name="about" class="form-control">
-                        </div>
-                </div>
-
-                <div class="modal-footer menu-buttons-container">
-                    <button type="submit" class="rounded-button">Save</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>

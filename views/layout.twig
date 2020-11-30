@@ -144,6 +144,18 @@
             document.getElementById("calendarButton").classList.add('menu-active-button');
         }
     </script>
+
+    <script>
+        function load_form (url, target) {
+            $.ajax({
+                method: "GET",
+                url: url,
+                dataType: "html"
+            }).done(function( data ) {
+                $(target).html(data);
+            });
+        }
+    </script>
 {% endblock %}
 
 </body>

@@ -6,22 +6,69 @@
     <h3 class = "name-entity-detail-frame" style="color: {{ entity.color.name }}">{{ entity.name }}</h3>
     <a href="{{ entity.url }}/edit" data-toggle="tooltip" ><i class="far fa-edit edit-icon-pos-set" style="color: {{ entity.color.name }}"></i></a>
 
-    <details class="fix-frame">
+    <details open class="fix-frame">
         <summary class = "style-for-entity-detail-list" style="background-color: {{ entity.color.name }}"> Scheduler</summary>
 
         {% for event in events %}
            <div class = "events-in-list-style" >• {{ event.date|date('d.m.Y') }} {{ event.name }}</div>
         {% endfor %}
-        <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add event</a>
+       <!-- <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add event</a> -->
+        <button class="add-new-eventOrdeadline-style events-in-list-style " style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addEventModal" onclick="load_form('/event/add/{{ entity.id }}', '#form_add_event')">
+            + Add event
+        </button>
     </details>
 
-    <details class="fix-frame">
+    <details open class="fix-frame">
         <summary class = "style-for-entity-detail-list" style="background-color: {{ entity.color.name }}"> Deadline</summary>
         {% for deadline in deadlines %}
         <div class = "events-in-list-style" >• {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
         {% endfor %}
-        <a class = "events-in-list-style-a" href="/deadline/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add deadline</a>
+        <!--  <a class = "events-in-list-style-a" href="/deadline/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add deadline</a> -->
+        <button class="add-new-eventOrdeadline-style events-in-list-style " style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addDeadlineModal" onclick="load_form('/deadline/add/{{ entity.id }}', '#form_add_deadline')">
+            + Add deadline
+        </button>
     </details>
 
 </div>
+
+
+    <!-- Модальне вікно для addEvent -->
+    <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"> Add New Event </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="form_add_event" style="margin: 10px">
+                    {# форму тянемо ajax #}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Модальне вікно для addDeadline -->
+    <div class="modal fade" id="addDeadlineModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"> Add New Deadline </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="form_add_deadline" style="margin: 10px">
+                    {# форму тянемо ajax #}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
