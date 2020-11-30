@@ -1,20 +1,11 @@
-{% extends 'layout.twig' %}
-
-{% block body %}
-
-    <h3>{{ title }}</h3>
-
-    <form action="/todo/add" method="post">
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label>Date</label>
-            <input type="date" name="date" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-
-
-{% endblock %}
+<form action="/todo/add" method="post">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Date</label>
+        <input type="date" name="date" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

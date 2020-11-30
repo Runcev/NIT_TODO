@@ -218,3 +218,20 @@ Entity list style
     color: whitesmoke;
     background-color: #7cbb5d;
 }
+
+.today{
+    font-size: 150%;
+    color: #7cbb5d;
+    font-weight: 700;
+}
+
+.style-for-today-detail-list{
+
+    width: 200px;
+    font-size: 100%;
+    padding: 5px 10px;
+    background-color: #7cbb5d;
+    font-weight: 900;
+    border-radius: 15px;
+    color :white;
+}
