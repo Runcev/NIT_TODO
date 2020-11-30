@@ -1,17 +1,31 @@
-var Event = require('../models/eventModel')
-var Entity = require('../models/entityModel')
-var Topic = require('../models/topicModel')
+var Event = require('../models/eventModel');
+var Entity = require('../models/entityModel');
+var Topic = require('../models/topicModel');
 
 exports.eventList = function (req, res) {
 
     let user = req.currentUser;
 
-    Event.find({user: user._id}).populate({path: 'entity', populate: {path: 'topic'}})
+    Event.find({user: user._id}).populate({path: 'entity', populate: {path: 'topic', populate: {path: 'color'}}})
         .exec(function (err, events) {
             if (err) console.log(err);
 
             if (req.baseUrl.match(/api/)) {
-                res.send({events: JSON.stringify(events)});
+
+                let eventsCalendar = [];
+
+                events.forEach((el)=>{
+
+                    eventsCalendar.push({
+                        "id": el._id,
+                        "title": el.entity.name + ' (' + el.name + ')',
+                        "start": el.timeStart,
+                        "end": el.timeEnd,
+                        "backgroundColor": el.entity.topic.color.name
+                    });
+                });
+
+                res.json(eventsCalendar);
             } else {
                 res.render('event/eventList', {title: 'Events list', events: events});
             }
@@ -32,13 +46,15 @@ exports.eventAddGet = function (req, res) {
 
     let user = req.currentUser;
     let entityId = req.params.entityId??0;
+    let start = req.query.start??'';
+    let end = req.query.end??'';
 
     // список всіх сутностей авторизованого юзера
     Entity.find({user: user._id}).populate('topic')
         .exec(function (err, entities) {
             if (err) console.log(err);
 
-            res.render('event/eventAdd', {title: 'Add event', entities: entities, entityId: entityId});
+            res.render('event/eventAdd', {title: 'Add event', entities: entities, entityId: entityId, start: start, end: end});
         });
 }
 
@@ -46,9 +62,8 @@ exports.eventAddGet = function (req, res) {
 exports.eventAdd = function (req, res) {
 
     let name = req.body.name;
-    let date = req.body.date;
-    let timeStart = req.body.timeStart;
-    let timeEnd = req.body.timeEnd;
+    let timeStart = req.body.date + 'T' + req.body.timeStart;
+    let timeEnd = req.body.date + 'T' + req.body.timeEnd;
     let entity = req.body.entity;
     let place = req.body.place;
     let about = req.body.about;
@@ -56,7 +71,7 @@ exports.eventAdd = function (req, res) {
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
 
-    var event = new Event({name: name, user: user._id, date: date, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+    var event = new Event({name: name, user: user._id, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
 
     event.save(function (err) {
 
@@ -66,7 +81,7 @@ exports.eventAdd = function (req, res) {
     if (req.baseUrl.match(/api/)) {
         res.send('');
     } else {
-        res.redirect('/event');
+        res.redirect('/');
     }
 };
 
@@ -95,14 +110,13 @@ exports.eventEdit = function (req, res) {
 exports.eventUpdate = function (req, res) {
 
     let name = req.body.name;
-    let date = req.body.date;
-    let timeStart = req.body.timeStart;
-    let timeEnd = req.body.timeEnd;
+    let timeStart = req.body.date + 'T' + req.body.timeStart;
+    let timeEnd = req.body.date + 'T' + req.body.timeEnd;
     let entity = req.body.entity;
     let place = req.body.place;
     let about = req.body.about;
 
-    var event = new Event({_id: req.params.id, name: name, date: date, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+    var event = new Event({_id: req.params.id, name: name, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
 
     Event.findByIdAndUpdate(req.params.id, event, {}, function (err, event) {
         if (err) console.log(err);
@@ -110,7 +124,7 @@ exports.eventUpdate = function (req, res) {
         if (req.baseUrl.match(/api/)) {
             res.send('');
         } else {
-            res.redirect('/event');
+            res.redirect('/');
         }
     });
 };

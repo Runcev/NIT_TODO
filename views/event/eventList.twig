@@ -13,6 +13,9 @@
                 Name
             </th>
             <th>
+                Entity
+            </th>
+            <th>
                 Date
             </th>
             <th>
@@ -23,9 +26,6 @@
             </th>
             <th>
                 Topic
-            </th>
-            <th>
-                Entity
             </th>
             <th>
                 Place
@@ -44,19 +44,19 @@
                     {{ event.name }}
                 </td>
                 <td>
-                    {{ event.date|date('d.m.Y') }}
-                </td>
-                <td>
-                    {{ event.timeStart }}
-                </td>
-                <td>
-                    {{ event.timeEnd }}
-                </td>
-                <td>
-                    {{ event.entity.topic.name }}
-                </td>
-                <td>
                     {{ event.entity.name }}
+                </td>
+                <td>
+                    {{ event.timeStart|date('d.m.Y') }}
+                </td>
+                <td>
+                    {{ event.timeStart|date('H:i') }}
+                </td>
+                <td>
+                    {{ event.timeEnd|date('H:i') }}
+                </td>
+                <td style="background-color: {{ event.entity.topic.color.name }}">
+                    {{ event.entity.topic.name }}
                 </td>
                 <td>
                     {{ event.place }}

@@ -7,9 +7,8 @@ var Schema = mongoose.Schema;
 var EventSchema = new Schema(
     {
         name: {type: String, required: true, trim: true},
-        date: { type: Date, required: true, default: Date.now },
-        timeStart: { type: String, required: true, trim: true},
-        timeEnd: { type: String, required: true, trim: true},
+        timeStart: { type: Date, required: true},
+        timeEnd: { type: Date, required: true},
         entity: {type: Number, ref: 'Entity', required: true},
         user: {type: Number, ref: 'User', required: true},
         place: {type: String, trim: true},

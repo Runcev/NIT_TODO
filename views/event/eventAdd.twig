@@ -6,15 +6,15 @@
         </div>
         <div class="form-group">
             <label>Date</label>
-            <input type="date" name="date" class="form-control" required>
+            <input type="date" name="date" class="form-control" required value="{% if start != '' %}{{ start|date('Y-m-d') }}{% endif %}">
         </div>
         <div class="form-group">
             <label>Time start (hh:mm)</label>
-            <input type="time" name="timeStart" class="form-control" required>
+            <input type="time" name="timeStart" class="form-control" required value="{% if start != '' %}{{ start|date('H:i') }}{% endif %}">
         </div>
         <div class="form-group">
             <label>Time end (hh:mm)</label>
-            <input type="time" name="timeEnd" class="form-control" required>
+            <input type="time" name="timeEnd" class="form-control" required value="{% if end != '' %}{{ end|date('H:i') }}{% endif %}">
         </div>
 
         <div class="form-group">

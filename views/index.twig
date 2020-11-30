@@ -1,8 +1,41 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+    <link href='/calendar/css/main.css' rel='stylesheet' />
 
     <div id="calendar"></div>
+
+    <div id="add_event_modal" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="div_add_event">
+                    {# ajax #}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit_event_modal" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="div_edit_event">
+                    {# ajax #}
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -10,7 +43,79 @@
 
     {{ parent() }}
 
-    <script src="calendar/js/app.bundle.js"></script>
+    <script src='/calendar/js/main.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                themeSystem: 'bootstrap',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                firstDay: 1,
+                scrollTime: '07:00:00',
+                defaultView: 'dayGridWeek',
+                eventBorderColor: 'white',
+
+                locale: 'en',
+
+                // формат івентів 24H
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                },
+
+                // формат шкали часу 24H
+                slotLabelFormat: [
+                    {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    }
+                ],
+
+                allDaySlot: false,
+                navLinks: true, // can click day/week names to navigate views
+                selectable: true,
+                selectMirror: true,
+
+                select: function(arg) {
+
+                    load_form('/event/add/?start='+arg.start.toISOString()+'&end='+arg.end.toISOString(), '#div_add_event');
+
+                    $('#add_event_modal').modal({
+                        keyboard: false
+                    });
+                },
+
+                eventClick: function(arg) {
+
+                    load_form('/event/'+arg.event.id+'/edit', '#div_edit_event');
+
+                    $('#edit_event_modal').modal({
+                        keyboard: false
+                    });
+                },
+
+                editable: false,
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: {
+                    url: '/api/event',
+                }
+            });
+
+            calendar.render();
+            calendar.changeView('timeGridWeek');
+        });
+
+    </script>
+
+    <style>#calendar button {background-color: #7cbb5d; border: 0;}</style>
 
 {% endblock %}
 
