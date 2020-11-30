@@ -25,11 +25,10 @@
         </div>
     {% endfor %}
     <!--onclick="location.href='/entity/add'" -->
-    <div class="add-entity-buttons-container menu-buttons-container">
-        <button type="button"class="rounded-button" data-toggle="modal" data-target="#addTopicModal" onclick="load_form('/topic/add', '#form_add_topic')">
-            Add topic
+        <button type="button" class="add-new-topic-style" data-toggle="modal" data-target="#addTopicModal" onclick="load_form('/topic/add', '#form_add_topic')">
+           <h3> Create new Topic + </h3>
         </button>
-    </div>
+
 
     <!-- Модальне вікно для addEntity -->
     <div class="modal fade" id="addEntityModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

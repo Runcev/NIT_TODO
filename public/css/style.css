@@ -166,11 +166,7 @@ Entity list style
 }
 
 .entity-buttons-container{
-    margin: 15px 0;
-}
-
-.entity-buttons-container :first-child{
-    margin-left: 15px;
+    margin: 15px ;
 }
 
 .entity-buttons-container button{
@@ -217,4 +213,20 @@ Entity list style
 .entity-buttons-container div button:hover{
     color: whitesmoke;
     background-color: #7cbb5d;
+}
+
+.add-new-topic-style{
+    background-color: white;
+    transition: color 0.3s linear;
+    color:  #7cbb5d;
+    border: 0;
+}
+
+.add-new-topic-style :hover{
+    background-color: white;
+    color: green;
+}
+
+.add-new-topic-style :focus{
+    outline: 0;
 }
