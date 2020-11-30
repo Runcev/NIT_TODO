@@ -17,25 +17,24 @@
         <div class>
             <h3 class = "today"> Today</h3>
         
-            <details class="fix-frame">
+            <details open class="fix-frame">
                 <summary class = "style-for-today-detail-list">Calendar <a>&#128197;</a></summary>
 
-                    <li>hello</li>
-
                 {% for event in events %}
-                     
+                    <li>
+                        {% if event.date|date('Y-m-d H:i') <= date()|date('Y-m-d H:i') 
+                        and event.date|date('Y-m-d') == date()|date('Y-m-d')  %}
+                            {{ event.name }}
+                        {% endif %}
+                    </li>
                 {% endfor %}
 
             </details>
 
-            <details class="fix-frame">
+            <details open class="fix-frame">
                 <summary class = "style-for-today-detail-list">Habits <a>&#x1f4aa;</a></summary>
 
-                <li>
-                    <input type="checkbox"/>
-                    CHECK
-                </li>
-
+            
                 {% for habit in habits %}
                     <li>
                         <input type="checkbox"/>
@@ -45,7 +44,7 @@
 
             </details>
 
-            <details class="fix-frame">
+            <details open class="fix-frame">
                 <summary class = "style-for-today-detail-list"> To do <a>&#9989;</a> </summary>
                 {% for todo in todos %}
                     <li>
