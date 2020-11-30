@@ -13,7 +13,7 @@
            <div class = "events-in-list-style" >• {{ event.date|date('d.m.Y') }} {{ event.name }}</div>
         {% endfor %}
        <!-- <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add event</a> -->
-        <button class="add-new-eventOrdeadline-style" style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addEntityModal" onclick="load_form('/entity/add/{{ topic.id }}', '#form_add_entity')">
+        <button class="add-new-eventOrdeadline-style events-in-list-style " style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addEventModal" onclick="load_form('/event/add/{{ entity.id }}', '#form_add_event')">
             + Add event
         </button>
     </details>
@@ -24,10 +24,51 @@
         <div class = "events-in-list-style" >• {{ deadline.date|date('d.m.Y') }} {{ deadline.name }}</div>
         {% endfor %}
         <!--  <a class = "events-in-list-style-a" href="/deadline/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add deadline</a> -->
-        <button class="add-new-eventOrdeadline-style" style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addEntityModal" onclick="load_form('/entity/add/{{ topic.id }}', '#form_add_entity')">
+        <button class="add-new-eventOrdeadline-style events-in-list-style " style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addDeadlineModal" onclick="load_form('/deadline/add/{{ entity.id }}', '#form_add_deadline')">
             + Add deadline
         </button>
     </details>
 
 </div>
+
+
+    <!-- Модальне вікно для addEvent -->
+    <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"> Add New Event </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="form_add_event" style="margin: 10px">
+                    {# форму тянемо ajax #}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Модальне вікно для addDeadline -->
+    <div class="modal fade" id="addDeadlineModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"> Add New Deadline </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="form_add_deadline" style="margin: 10px">
+                    {# форму тянемо ajax #}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
