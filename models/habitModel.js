@@ -9,12 +9,14 @@ var HabitSchema = new Schema(
         name: {type: String, required: true, trim: true},
         user: {type: Number, ref: 'User', required: true},
         // коли була додана звичка
-        dateIn: { type: Date, required: true, default: Date.now},
+        dateIn: { type: Date},
         // актуальна чи ні
         isActual: {type: Boolean, default: true},
         thisMonthTargetCount: {type: Number},
         thisMonthCounter: {type: Number},
-        counter: {type: Number}
+        counter: {type: Number},
+        // виконувалась сьогодні чи ні
+        curDate: { type: Date},
     }
 );
 

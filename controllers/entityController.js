@@ -38,23 +38,27 @@ exports.entityDetail = function (req, res) {
         .exec(function (err, entity) {
             if (err) console.log(err);
 
-            Event.find({user: user._id, entity: entity[0]._id})
-                .exec(function (err, events) {
-                    if (err) console.log(err);
+            if (entity.length == 0) {
+                res.send('Page not found. <a href="/">Go home</a>');
+            } else {
+                Event.find({user: user._id, entity: entity[0]._id}).sort('timeStart')
+                    .exec(function (err, events) {
+                        if (err) console.log(err);
 
-                    Deadline.find({user: user._id, entity: entity[0]._id})
-                        .exec(function(err,deadlines){
-                            if(err){
-                                console.log(err);
-                            }
+                        Deadline.find({user: user._id, entity: entity[0]._id}).sort('date')
+                            .exec(function(err,deadlines){
+                                if(err){
+                                    console.log(err);
+                                }
 
-                            if (req.baseUrl.match(/api/)) {
-                                res.send({entity: JSON.stringify(entity[0]), events: JSON.stringify(events), deadlines: JSON.stringify(deadlines)});
-                            } else {
-                                res.render('entity/entityDetail', {title: 'Entity', entity: entity[0], events: events, deadlines: deadlines});
-                            }
-                        });
-                });
+                                if (req.baseUrl.match(/api/)) {
+                                    res.send({entity: JSON.stringify(entity[0]), events: JSON.stringify(events), deadlines: JSON.stringify(deadlines)});
+                                } else {
+                                    res.render('entity/entityDetail', {title: 'Entity', entity: entity[0], events: events, deadlines: deadlines});
+                                }
+                            });
+                    });
+            }
         });
 };
 

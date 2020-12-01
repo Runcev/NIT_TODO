@@ -1,5 +1,5 @@
 
-    <form action="/event/{{ event.id }}/update" method="post">
+    <form action="/event/{{ event.id }}/update{% if backUrl != '' %}?backUrl={{ backUrl }}{% endif %}" method="post">
         <div class="form-group">
             <label>Name</label>
             <input type="text" name="name" class="form-control" required value="{{ event.name }}">
@@ -36,5 +36,7 @@
             <input type="text" name="about" class="form-control" value="{{ event.about }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="modal-footer menu-buttons-container">
+            <button type="submit" class="rounded-button">Save</button>
+        </div>
     </form>

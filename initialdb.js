@@ -78,28 +78,28 @@ function createDeadlines(cb) {
 
     async.series([
             function (callback) {
-                deadlineCreate('Lab1', '2020-12-07T16:00', entities[0], users[0], callback);
+                deadlineCreate('Lab1', '2020-12-05T16:00', entities[0], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab2', '2020-12-06T17:00', entities[0], users[0], callback);
+                deadlineCreate('Lab2', '2020-12-07T17:00', entities[0], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab3', '2020-12-05T23:00', entities[1], users[0], callback);
+                deadlineCreate('Lab3', '2020-12-04T23:00', entities[1], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab4', '2020-12-05T23:00', entities[1], users[0], callback);
+                deadlineCreate('Lab4', '2020-12-06T23:00', entities[1], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab5', '2020-12-01T16:00', entities[2], users[0], callback);
+                deadlineCreate('Lab5', '2020-12-02T16:00', entities[2], users[0], callback);
             },
             function (callback) {
                 deadlineCreate('Lab6', '2020-12-02T17:00', entities[2], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab7', '2020-12-01T23:00', entities[3], users[0], callback);
+                deadlineCreate('Lab7', '2020-12-09T23:00', entities[3], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab8', '2020-12-02T23:00', entities[3], users[0], callback);
+                deadlineCreate('Lab8', '2020-12-12T23:00', entities[3], users[0], callback);
             },
         ],
         // optional callback
@@ -188,7 +188,7 @@ function createTopics(cb) {
 
     async.series([
             function (callback) {
-                topicCreate('University', users[0], colors[10], callback);
+                topicCreate('University', users[0], colors[3], callback);
             },
             function (callback) {
                 topicCreate('Sport', users[0], colors[12], callback);
@@ -290,7 +290,7 @@ function createEvents(cb) {
 
 function habitCreate(name, user, isActual, thisMonthTargetCount, thisMonthCounter, counter, cb) {
 
-    var habit = new Habit({name: name, user: user, isActual: isActual, thisMonthTargetCount: thisMonthTargetCount, thisMonthCounter: thisMonthCounter, counter: counter});
+    var habit = new Habit({name: name, user: user, isActual: isActual, thisMonthTargetCount: thisMonthTargetCount, thisMonthCounter: thisMonthCounter, counter: counter, curDate: '', dateIn: Date.now()});
 
     habit.save(function (err) {
 

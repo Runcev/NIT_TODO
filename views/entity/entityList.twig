@@ -3,7 +3,7 @@
 {% block body %}
 
     {% for topic in topics %}
-        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="{{ topic.url }}/edit" data-toggle="tooltip" ><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a><br>
+        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="#" onclick="load_form('{{ topic.url }}/edit', '#div_modal_data', 'Edit topic'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a><br>
 
         <div class="entity-buttons-container">
         {% for entity in entities %}

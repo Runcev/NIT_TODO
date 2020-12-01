@@ -34,13 +34,14 @@ exports.deadlineAddGet = function (req, res) {
 
     let user = req.currentUser;
     let entityId = req.params.entityId??0;
+    let backUrl = req.query.backUrl??'';
 
     // список всіх сутностей авторизованого юзера
     Entity.find({user: user._id}).populate('topic')
         .exec(function (err, entities) {
             if (err) console.log(err);
 
-            res.render('deadline/deadlineAdd', {title: 'Add deadline', entities: entities, entityId: entityId});
+            res.render('deadline/deadlineAdd', {title: 'Add deadline', entities: entities, entityId: entityId, backUrl: backUrl});
         });
 }
 
@@ -51,6 +52,7 @@ exports.deadlineAdd = function (req, res) {
     let entity = req.body.entity;
     let date = req.body.date + 'T' + req.body.timeEnd;
     let user = req.currentUser;
+    let backUrl = req.query.backUrl??'';
 
     var deadline = new Deadline({date: date, name: name, entity: entity, user: user});
 
@@ -61,7 +63,11 @@ exports.deadlineAdd = function (req, res) {
     if (req.baseUrl.match(/api/)) {
         res.send('');
     } else {
-        res.redirect('/deadline'); 
+        if (backUrl != '') {
+            res.redirect('/'+backUrl);
+        } else {
+            res.redirect('/deadline');
+        }
     }
 };
 
@@ -69,6 +75,7 @@ exports.deadlineAdd = function (req, res) {
 exports.deadlineEdit = function (req, res) {
 
     let deadlineId = req.params.id;
+    let backUrl = req.query.backUrl??'';
 
     Deadline.findById(deadlineId).exec(function (err, deadline) {
         if (err) {
@@ -82,7 +89,7 @@ exports.deadlineEdit = function (req, res) {
             .exec(function (err, entities) {
                 if (err) console.log(err);
 
-                res.render('deadline/deadlineEdit', {title: 'Edit deadline', deadline: deadline, entities: entities});
+                res.render('deadline/deadlineEdit', {title: 'Edit deadline', deadline: deadline, entities: entities, backUrl: backUrl});
             });
     });
 };
@@ -92,6 +99,7 @@ exports.deadlineUpdate = function (req, res) {
     let name = req.body.name;
     let entity = req.body.entity;
     let date = req.body.date + 'T' + req.body.timeEnd;
+    let backUrl = req.query.backUrl??'';
 
     var deadline = new Deadline({date: date, name: name, entity: entity, _id: req.params.id});
 
@@ -101,7 +109,11 @@ exports.deadlineUpdate = function (req, res) {
         if (req.baseUrl.match(/api/)) {
             res.send('');
         } else {
-            res.redirect('/deadline'); 
+            if (backUrl != '') {
+                res.redirect('/'+backUrl);
+            } else {
+                res.redirect('/deadline');
+            }
         }
     });
 };

@@ -9,6 +9,7 @@ var TodoSchema = new Schema(
         name: {type: String, required: true, trim: true},
         date: { type: Date, required: true, default: Date.now },
         user: {type: Number, ref: 'User', required: true},
+        isDone: {type: Boolean, default: false}
     }
 );
 

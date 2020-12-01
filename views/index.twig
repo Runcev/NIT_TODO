@@ -5,38 +5,6 @@
 
     <div id="calendar"></div>
 
-    <div id="add_event_modal" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="div_add_event">
-                    {# ajax #}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="edit_event_modal" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Edit event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="div_edit_event">
-                    {# ajax #}
-                </div>
-            </div>
-        </div>
-    </div>
-
 {% endblock %}
 
 {% block javascripts %}
@@ -58,8 +26,6 @@
                 },
                 firstDay: 1,
                 scrollTime: '07:00:00',
-                defaultView: 'dayGridWeek',
-                //eventBorderColor: 'white',
 
                 locale: 'en',
 
@@ -86,18 +52,18 @@
 
                 select: function(arg) {
 
-                    load_form('/event/add/?start='+arg.start.toISOString()+'&end='+arg.end.toISOString(), '#div_add_event');
+                    load_form('/event/add/?start='+arg.start.toISOString()+'&end='+arg.end.toISOString(), '#div_modal_data', 'Add event');
 
-                    $('#add_event_modal').modal({
+                    $('#modal_global').modal({
                         keyboard: false
                     });
                 },
 
                 eventClick: function(arg) {
 
-                    load_form('/event/'+arg.event.id+'/edit', '#div_edit_event');
+                    load_form('/event/'+arg.event.id+'/edit', '#div_modal_data', 'Edit event');
 
-                    $('#edit_event_modal').modal({
+                    $('#modal_global').modal({
                         keyboard: false
                     });
                 },
@@ -110,7 +76,12 @@
             });
 
             calendar.render();
-            calendar.changeView('timeGridWeek');
+
+            {% if showDay == 1 %}
+                calendar.changeView('timeGridDay');
+            {% else %}
+                calendar.changeView('timeGridWeek');
+            {% endif %}
         });
 
     </script>

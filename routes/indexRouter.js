@@ -10,7 +10,9 @@ var Deadline = require('../models/deadlineModel');
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-    res.render('index', {title: 'Home page'});
+    let showDay = req.query.showDay??'';
+
+    res.render('index', {title: '', showDay: showDay});
 });
 
 router.get('/right-block', function (req, res, next) {

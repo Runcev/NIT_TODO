@@ -48,13 +48,14 @@ exports.eventAddGet = function (req, res) {
     let entityId = req.params.entityId??0;
     let start = req.query.start??'';
     let end = req.query.end??'';
+    let backUrl = req.query.backUrl??'';
 
     // список всіх сутностей авторизованого юзера
     Entity.find({user: user._id}).populate('topic')
         .exec(function (err, entities) {
             if (err) console.log(err);
 
-            res.render('event/eventAdd', {title: 'Add event', entities: entities, entityId: entityId, start: start, end: end});
+            res.render('event/eventAdd', {title: 'Add event', entities: entities, entityId: entityId, start: start, end: end, backUrl: backUrl});
         });
 }
 
@@ -67,6 +68,7 @@ exports.eventAdd = function (req, res) {
     let entity = req.body.entity;
     let place = req.body.place;
     let about = req.body.about;
+    let backUrl = req.query.backUrl??'';
 
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
@@ -81,7 +83,11 @@ exports.eventAdd = function (req, res) {
     if (req.baseUrl.match(/api/)) {
         res.send('');
     } else {
-        res.redirect('/');
+        if (backUrl != '') {
+            res.redirect('/'+backUrl);
+        } else {
+            res.redirect('/');
+        }
     }
 };
 
@@ -89,6 +95,7 @@ exports.eventAdd = function (req, res) {
 exports.eventEdit = function (req, res) {
 
     let eventId = req.params.id;
+    let backUrl = req.query.backUrl??'';
 
     Event.findById(eventId).exec(function (err, event) {
         if (err) {
@@ -102,7 +109,7 @@ exports.eventEdit = function (req, res) {
             .exec(function (err, entities) {
                 if (err) console.log(err);
 
-                res.render('event/eventEdit', {title: 'Edit event', event: event, entities: entities});
+                res.render('event/eventEdit', {title: 'Edit event', event: event, entities: entities, backUrl: backUrl});
             });
     });
 };
@@ -115,6 +122,7 @@ exports.eventUpdate = function (req, res) {
     let entity = req.body.entity;
     let place = req.body.place;
     let about = req.body.about;
+    let backUrl = req.query.backUrl??'';
 
     var event = new Event({_id: req.params.id, name: name, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
 
@@ -124,7 +132,11 @@ exports.eventUpdate = function (req, res) {
         if (req.baseUrl.match(/api/)) {
             res.send('');
         } else {
-            res.redirect('/');
+            if (backUrl != '') {
+                res.redirect('/'+backUrl);
+            } else {
+                res.redirect('/');
+            }
         }
     });
 };

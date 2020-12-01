@@ -8,7 +8,7 @@
         {% for deadline in deadlines %}
             <tr>
                 <td width="20px">
-                    <a href="{{ deadline.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                    <a href="#" onclick="load_form('{{ deadline.url }}/edit', '#div_modal_data', 'Edit deadline'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
                 </td>
                 <td>
                     {{ deadline.date|date('d.m.Y H:i') }}

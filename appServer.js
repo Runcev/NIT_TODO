@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // авторизація
 var userId = function (req, res, next) {
-
+/*
     // тимчасова "заглушка", щоб реєстрацію не питало кожен раз :)
     var User = require('./models/userModel');
 
@@ -64,8 +64,7 @@ var userId = function (req, res, next) {
         req.currentUser = user;
         next();
         });
-
-    /*
+*/
     // юзер авторизований
     if (req.session.currentUser) {
         req.currentUser = req.session.currentUser;
@@ -132,7 +131,7 @@ var userId = function (req, res, next) {
                     res.send('');
                 } else {
                     req.session.currentUser = user;
-                    res.redirect('/event');
+                    res.redirect('/');
                 }
             } else {
                 if (req.baseUrl.match(/api/)) {
@@ -143,7 +142,6 @@ var userId = function (req, res, next) {
             }
         });
     }
-    */
 }
 
 app.use(userId);

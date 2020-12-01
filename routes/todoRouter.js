@@ -17,6 +17,9 @@ router.get('/add', todoController.todoAddGet);
 
 router.get('/:id/edit', todoController.todoEdit);
 
+// переключаємо виконано/не виконано
+router.get('/:id/checked', todoController.todoChecked);
+
 router.post('/:id/update', todoController.todoUpdate);
 router.put('/:id/update', todoController.todoUpdate);
 

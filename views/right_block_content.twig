@@ -1,5 +1,5 @@
-<div class="rightF point"> <!--позиція -->
-    <div class>
+<div> <!--позиція -->
+    <div>
         <h3 class="today"> Today</h3>
 
         <details open class="fix-frame">
@@ -21,6 +21,9 @@
 
             {% endfor %}
 
+            <div style="margin-left: 10px">
+                <a href="/?showDay=1">see on calendar</a>
+            </div>
         </details>
         
         <details open class="fix-frame">
@@ -39,41 +42,48 @@
             <summary class="style-for-today-detail-list">Habits 💪</summary>
 
             {% for habit in habits %}
-                <div style="margin-left: 10px"><input type="checkbox"> {{habit.name}}</div>
+                {% if habit.isActual is same as(true) %}
+                    <div style="margin-left: 10px"><input habit_id="{{ habit.id }}" {% if habit.curDate != null and habit.curDate|date('d.m.Y') == date()|date('d.m.Y') %}checked{% endif %} type="checkbox"> {{habit.name}}</div>
+                {% endif %}
             {% endfor %}
+
+            <div style="margin-left: 10px">
+                <a href="#" onclick="load_form('/habit/add', '#div_modal_data', 'Add habit'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Add habit">+ add habit</a>
+            </div>
 
         </details>
 
         <details open class="fix-frame">
             <summary class="style-for-today-detail-list"> To do ✅</summary>
             {% for todo in todos %}
-                <div style="margin-left: 10px">
-                    <input type="checkbox" class="css-checkbox"/>
-                    {{ todo.name }}
+                <div id="todo_{{ todo.id }}" style="margin-left: 10px">
+                    <input type="checkbox" class="css-checkbox" {% if todo.isDone is same as(true) %}checked{% endif %} onclick="send_request('/todo/{{ todo.id }}/checked')"/>
+                    {{ todo.name }} <a href="#" onclick="send_request('/todo/{{ todo.id }}/delete'); $('#todo_{{ todo.id }}').hide();" data-toggle="tooltip" title="Delete"><i class="fas fa-times"></i></a>
                 </div>
             {% endfor %}
+
+            <div style="margin-left: 10px">
+                <a href="#" onclick="load_form('/todo/add', '#div_modal_data', 'Add todo'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Add todo">+ add todo</a>
+            </div>
+
         </details>
 
-        <div style="display: inline-block;">
-            <button class="circle-button" data-toggle="modal" data-target="#addTodoModal" onclick="load_form('/todo/add/', '#form_add_todo')">
-                +
-            </button>
-        </div>
-
-        <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modalLabel"> Add new Todo </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div id="form_add_todo" style="margin: 10px">
-                        {# форму тянемо ajax #}
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+
+        $('input[habit_id]').click(function (){
+            if ($(this).prop('checked') == true) {
+                // додаємо
+                send_request('/habit/'+$(this).attr('habit_id')+'/checked?num=1');
+            } else {
+                // віднімаємо
+                send_request('/habit/'+$(this).attr('habit_id')+'/checked?num=-1');
+            }
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>

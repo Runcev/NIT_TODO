@@ -1,4 +1,4 @@
-var Habit = require('../models/habitModel')
+var Habit = require('../models/habitModel');
 
 exports.habitList = function (req, res) {
 
@@ -86,6 +86,37 @@ exports.habitUpdate = function (req, res) {
         } else {
             res.redirect('/habit');
         }
+    });
+};
+
+exports.habitChecked = function (req, res) {
+
+    var habitId = req.params.id;
+
+    var num = req.query.num;
+
+    Habit.findById(habitId).exec(function (err, habit) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        // додаємо/або віднімаємо виконання
+        let thisMonthCounter = parseInt(habit.thisMonthCounter,10) + parseInt(num, 10);
+        let counter = parseInt(habit.counter, 10) + parseInt(num, 10);
+        let curDate = null;
+
+        if (num == 1) {
+            let date = new Date();
+            curDate = date.getTime();
+        }
+
+        var habitChange = new Habit({curDate:curDate, thisMonthCounter: thisMonthCounter, counter: counter, _id: habitId});
+
+        Habit.findByIdAndUpdate(habitId, habitChange, {}, function(err, habitChange) {
+            if (err) console.log(err);
+
+            res.json({});
+        });
     });
 };
 

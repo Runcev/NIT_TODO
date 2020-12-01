@@ -85,11 +85,35 @@ exports.todoUpdate = function (req, res) {
     });
 };
 
+exports.todoChecked = function (req, res) {
+
+    var todoId = req.params.id;
+
+    Todo.findById(todoId).exec(function (err, todo) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        // перемикаємо на протилежне
+        var todoChange = new Todo({isDone: !todo.isDone, _id: todoId});
+
+        Todo.findByIdAndUpdate(todoId, todoChange, {}, function(err, todoChange) {
+            if (err) console.log(err);
+
+            res.json({});
+        });
+    });
+};
+
 exports.todoDelete = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    var todoId = req.params.id;
+
+    Todo.findByIdAndDelete(todoId).exec(function (err, todo) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.json({});
+    });
 };

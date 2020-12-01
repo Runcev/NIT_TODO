@@ -1,8 +1,3 @@
-{% extends 'layout.twig' %}
-
-{% block body %}
-
-    <h3>{{ title }}</h3>
 
     <form action="/topic/{{ topic.id }}/update" method="post">
 
@@ -19,16 +14,10 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="modal-footer menu-buttons-container">
+            <button type="submit" class="rounded-button">Save</button>
+        </div>
     </form>
 
-{% endblock %}
-
-{% block javascripts %}
-
-    {{ parent() }}
-
     <script>$('#select_color').css('background-color', $('#select_color option:selected').html());</script>
-
-{% endblock %}
 

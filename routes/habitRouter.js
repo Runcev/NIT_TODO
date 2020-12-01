@@ -27,6 +27,8 @@ router.post('/add', habitController.habitAdd);
 
 router.get('/:id/edit', habitController.habitEdit);
 
+router.get('/:id/checked', habitController.habitChecked);
+
 router.get('/:id', habitController.habitDetail);
 
 router.post('/:id/update', habitController.habitUpdate);
