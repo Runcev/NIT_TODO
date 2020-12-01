@@ -1,64 +1,6 @@
 <style>
-    .rightF {
-        float: right;
-        margin-top: 50px;
 
-    }
 
-    .today-font {
-        font-size: 150%;
-        text-align: center;
-        color: #7cbb5d;
-    }
-
-    .submenu {
-        font-size: 120%;
-        text-align: center;
-    }
-
-    li {
-        list-style-type: none;
-        font-size: 100%;
-        text-align: center;
-
-    }
-
-    li:hover {
-        cursor: default;
-        border-radius: 7px;
-        background-color: #dce3dc;
-        transition: all 500ms ease
-    }
-
-    li.checked {
-        text-decoration: line-through;
-        border-radius: 7px;
-    }
-
-    li.checked::before {
-        position: absolute;
-        border-style: solid;
-        border-radius: 7px;
-    }
-
-    dt.checked {
-        text-decoration: line-through;
-        border-radius: 7px;
-    }
-
-    dt.checked::before {
-        position: absolute;
-        border-style: solid;
-        border-radius: 7px;
-    }
-
-    dt {
-        font-size: 120%;
-        color: white;
-        text-align: center;
-        border-radius: 7px;
-        background-color: #7cbb5d;
-    }
 </style>
 
 <div class="rightF point"> <!--позиція -->
@@ -66,35 +8,55 @@
         <h3 class="today"> Today</h3>
 
         <details open class="fix-frame">
-            <summary class="style-for-today-detail-list">Calendar <a>&#128197;</a></summary>
+            <summary class="style-for-today-detail-list">Events 📅</summary>
 
             {% for event in events %}
 
-                {% if event.timeStart|date('Y-m-d') == date()|date('Y-m-d') %}
-                    <div style="margin-left: 10px">{{ event.entity.name }} ({{ event.name }})</div>
+                {% if event.timeStart|date('Y-m-d') == date()|date('Y-m-d')%}
+
+                    {% if event.timeStart|date('H:i') >= date()|date('H:i') %}
+                       <div style="margin-left: 10px">{{ event.entity.name }} ({{ event.name }}) - {{event.timeEnd|date('H:i')}}</div>
+
+                    {% elseif event.timeStart|date('H:i') <= date()|date('H:i') %}
+                        <div style="margin-left: 10px"><strike>{{ event.entity.name }} ({{ event.name }}) - {{event.timeEnd|date('H:i')}}</strike></div>
+
+                    {% endif %}
+
                 {% endif %}
+
+            {% endfor %}
+
+        </details>
+        
+        <details open class="fix-frame">
+            <summary class="style-for-today-detail-list">Deadlines 💀</summary>
+
+            {% for deadline in deadlines %}
+                {% if deadline.date|date('Y-m-d') == date()|date('Y-m-d') %}
+                    <div style="margin-left: 10px">{{ deadline.entity.name }} ({{ deadline.name }})</div>
+                {% endif %}
+                
             {% endfor %}
 
         </details>
 
         <details open class="fix-frame">
-            <summary class="style-for-today-detail-list">Habits <a>&#x1f4aa;</a></summary>
-
+            <summary class="style-for-today-detail-list">Habits 💪</summary>
 
             {% for habit in habits %}
-                <li>
-                    <input type="checkbox"/>
-                    {{ habit.name }}
-                </li>
+                <input type="checkbox" id="_checkbox">
+                <label>
+                    <div id="tick_mark">{{habit.name}}</div>
+                </label>
             {% endfor %}
 
         </details>
 
         <details open class="fix-frame">
-            <summary class="style-for-today-detail-list"> To do <a>&#9989;</a></summary>
+            <summary class="style-for-today-detail-list"> To do ✅</summary>
             {% for todo in todos %}
                 <li>
-                    <input type="checkbox"/>
+                    <input type="checkbox" class="css-checkbox"/>
                     {{ todo.name }}
                 </li>
             {% endfor %}
@@ -121,6 +83,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
