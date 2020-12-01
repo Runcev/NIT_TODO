@@ -78,16 +78,28 @@ function createDeadlines(cb) {
 
     async.series([
             function (callback) {
-                deadlineCreate('Lab1', '2020-11-20T16:00Z', entities[0], users[0], callback);
+                deadlineCreate('Lab1', '2020-12-07T16:00', entities[0], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab2', '2020-11-25T17:00Z', entities[0], users[0], callback);
+                deadlineCreate('Lab2', '2020-12-06T17:00', entities[0], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab3', '2020-11-21T23:00Z', entities[1], users[0], callback);
+                deadlineCreate('Lab3', '2020-12-05T23:00', entities[1], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab4', '2020-11-27T23:00Z', entities[1], users[0], callback);
+                deadlineCreate('Lab4', '2020-12-05T23:00', entities[1], users[0], callback);
+            },
+            function (callback) {
+                deadlineCreate('Lab5', '2020-12-01T16:00', entities[2], users[0], callback);
+            },
+            function (callback) {
+                deadlineCreate('Lab6', '2020-12-02T17:00', entities[2], users[0], callback);
+            },
+            function (callback) {
+                deadlineCreate('Lab7', '2020-12-01T23:00', entities[3], users[0], callback);
+            },
+            function (callback) {
+                deadlineCreate('Lab8', '2020-12-02T23:00', entities[3], users[0], callback);
             },
         ],
         // optional callback
@@ -149,6 +161,9 @@ function createEntities(cb) {
             function (callback) {
                 entityCreate('Volleyball', users[0], topics[1], colors[6], callback);
             },
+            function (callback) {
+                entityCreate('Party', users[0], topics[2], colors[4], callback);
+            },
         ],
         // optional callback
         cb);
@@ -177,6 +192,9 @@ function createTopics(cb) {
             },
             function (callback) {
                 topicCreate('Sport', users[0], colors[12], callback);
+            },
+            function (callback) {
+                topicCreate('Personal', users[0], colors[5], callback);
             },
         ],
         // optional callback
@@ -251,7 +269,7 @@ function createEvents(cb) {
                 eventCreate('Training', '2020-12-03T08:00', '2020-12-03T09:30', entities[9], users[0], 'Pool', 'comment', callback);
             },
             function (callback) {
-                eventCreate('Game', '2020-12-03T17:00', '2020-12-03T19:30', entities[11], users[0], 'Park', 'comment', callback);
+                eventCreate("Birthday", '2020-12-01T22:00', '2020-12-01T23:30', entities[12], users[0], 'Club', 'comment', callback);
             },
         ],
         // optional callback

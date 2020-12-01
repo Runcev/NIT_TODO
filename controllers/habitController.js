@@ -13,7 +13,7 @@ exports.habitList = function (req, res) {
             if (req.baseUrl.match(/api/)) {
                 res.send({ habits: JSON.stringify(habits) });
             } else {
-                res.render('habit/habitList', {title: 'Habits list', habits: habits});
+                res.render('habit/habitList', {title: '', habits: habits});
             }
         });
 };

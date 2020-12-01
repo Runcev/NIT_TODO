@@ -1,11 +1,12 @@
-var Deadline = require('../models/deadlineModel')
-var Entity = require('../models/entityModel')
+var Deadline = require('../models/deadlineModel');
+var Entity = require('../models/entityModel');
+var Color = require('../models/colorModel');
 
 exports.deadlineList = function (req, res) {
 
     let user = req.currentUser;
 
-    Deadline.find({user: user._id}).populate('entity')
+    Deadline.find({user: user._id}).populate({path: 'entity', populate: {path: 'color'}}).sort('date')
         .exec(function(err,deadlines){
             if(err){
                 console.log(err);
@@ -14,7 +15,7 @@ exports.deadlineList = function (req, res) {
             if (req.baseUrl.match(/api/)) {
                 res.send({ deadlines : JSON.stringify(deadlines) });
             } else {
-                res.render('deadline/deadlineList', {title: 'Deadline list', deadlines: deadlines});
+                res.render('deadline/deadlineList', {title: '', deadlines: deadlines});
             }
         });
 };
@@ -48,7 +49,7 @@ exports.deadlineAdd = function (req, res) {
 
     let name = req.body.name;
     let entity = req.body.entity;
-    let date = req.body.date;
+    let date = req.body.date + 'T' + req.body.timeEnd;
     let user = req.currentUser;
 
     var deadline = new Deadline({date: date, name: name, entity: entity, user: user});
@@ -90,7 +91,7 @@ exports.deadlineUpdate = function (req, res) {
 
     let name = req.body.name;
     let entity = req.body.entity;
-    let date = req.body.date;
+    let date = req.body.date + 'T' + req.body.timeEnd;
 
     var deadline = new Deadline({date: date, name: name, entity: entity, _id: req.params.id});
 

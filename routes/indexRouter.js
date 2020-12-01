@@ -5,6 +5,7 @@ var Event = require('../models/eventModel');
 var Entity = require('../models/entityModel');
 var Topic = require('../models/topicModel');
 var Habit = require('../models/habitModel');
+var Deadline = require('../models/deadlineModel');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -32,7 +33,14 @@ router.get('/right-block', function (req, res, next) {
                                 console.log(err);
                             }
 
-                            res.render('right_block_content', {events: events, habits: habits, todos: todos });
+                            Deadline.find({user: user._id}).populate('entity')
+                                .exec(function(err,deadlines){
+                                    if(err){
+                                        console.log(err);
+                                    }
+
+                                    res.render('right_block_content', {events: events, habits: habits, todos: todos, deadlines: deadlines });
+                                });
                         });
                 });
         });

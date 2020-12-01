@@ -1,8 +1,3 @@
-<style>
-
-
-</style>
-
 <div class="rightF point"> <!--позиція -->
     <div class>
         <h3 class="today"> Today</h3>
@@ -15,10 +10,10 @@
                 {% if event.timeStart|date('Y-m-d') == date()|date('Y-m-d')%}
 
                     {% if event.timeStart|date('H:i') >= date()|date('H:i') %}
-                       <div style="margin-left: 10px">{{ event.entity.name }} ({{ event.name }}) - {{event.timeEnd|date('H:i')}}</div>
+                       <div style="margin-left: 10px">{{event.timeStart|date('H:i')}} {{ event.entity.name }} ({{ event.name }})</div>
 
                     {% elseif event.timeStart|date('H:i') <= date()|date('H:i') %}
-                        <div style="margin-left: 10px"><strike>{{ event.entity.name }} ({{ event.name }}) - {{event.timeEnd|date('H:i')}}</strike></div>
+                        <div style="margin-left: 10px; text-decoration: line-through;">{{event.timeEnd|date('H:i')}} {{ event.entity.name }} ({{ event.name }})</div>
 
                     {% endif %}
 
@@ -33,7 +28,7 @@
 
             {% for deadline in deadlines %}
                 {% if deadline.date|date('Y-m-d') == date()|date('Y-m-d') %}
-                    <div style="margin-left: 10px">{{ deadline.entity.name }} ({{ deadline.name }})</div>
+                    <div style="margin-left: 10px">{{ deadline.date|date('H:i') }} {{ deadline.entity.name }} ({{ deadline.name }})</div>
                 {% endif %}
                 
             {% endfor %}
@@ -44,10 +39,7 @@
             <summary class="style-for-today-detail-list">Habits 💪</summary>
 
             {% for habit in habits %}
-                <input type="checkbox" id="_checkbox">
-                <label>
-                    <div id="tick_mark">{{habit.name}}</div>
-                </label>
+                <div style="margin-left: 10px"><input type="checkbox"> {{habit.name}}</div>
             {% endfor %}
 
         </details>
@@ -55,15 +47,15 @@
         <details open class="fix-frame">
             <summary class="style-for-today-detail-list"> To do ✅</summary>
             {% for todo in todos %}
-                <li>
+                <div style="margin-left: 10px">
                     <input type="checkbox" class="css-checkbox"/>
                     {{ todo.name }}
-                </li>
+                </div>
             {% endfor %}
         </details>
 
         <div style="display: inline-block;">
-            <button class="circle-button" data-toggle="modal" data-target="#addTodoModal" onclick="load_form('/todo/add/{{ todo.id }}', '#form_add_todo')">
+            <button class="circle-button" data-toggle="modal" data-target="#addTodoModal" onclick="load_form('/todo/add/', '#form_add_todo')">
                 +
             </button>
         </div>

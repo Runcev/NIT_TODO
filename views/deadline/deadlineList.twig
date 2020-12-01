@@ -5,32 +5,19 @@
     <h3>{{ title }}</h3>
 
     <table class="table table-striped">
-        <tr>
-            <th>
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Entity
-            </th>
-            <th>
-                Date
-            </th>
-        </tr>
         {% for deadline in deadlines %}
             <tr>
                 <td width="20px">
                     <a href="{{ deadline.url }}/edit" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
                 </td>
                 <td>
+                    {{ deadline.date|date('d.m.Y H:i') }}
+                </td>
+                <td>
+                    <a style="color: {{ deadline.entity.color.name }}; font-weight: bold" href="/entity/{{ deadline.entity.id }}">{{ deadline.entity.name }}</a>
+                </td>
+                <td>
                     {{ deadline.name }}
-                </td>
-                <td>
-                    {{ deadline.entity.name }}
-                </td>
-                <td>
-                    {{ deadline.date|date('d.m.Y') }}
                 </td>
             </tr>
         {% endfor %}
