@@ -3,19 +3,25 @@
 {% block body %}
 
     {% for topic in topics %}
-        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="#" onclick="load_form('{{ topic.url }}/edit', '#div_modal_data', 'Edit topic'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a><br>
+        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="#" onclick="load_form('{{ topic.url }}/edit', '#div_modal_data', 'Edit topic'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a> <a id="del_topic_{{ topic.id }}" style="display: none" href="#" onclick="open_modal_confirm('Delete topic','Do you want delete this topic?', '/topic/{{ topic.id }}/delete', '/entity');" data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ topic.color.name }}"></i></a><br>
 
         <div class="entity-buttons-container">
+        {% set noEntity = 1 %}
         {% for entity in entities %}
 
             {% if entity.topic.id == topic.id %}
 
                 <button type="button" class="rounded-button" style="background-color: {{ entity.color.name }}" onclick="location.href='{{ entity.url }}'">
                     {{ entity.name }}
+                    {% set noEntity = 0 %}
                 </button>
             {% endif %}
 
         {% endfor %}
+         {% if noEntity == 1 %}
+             <script>$('#del_topic_{{ topic.id }}').show()</script>
+         {% endif %}
+
             <!-- Button for add entity -->
             <div style="display: inline-block;">
                 <button class="circle-button"  data-toggle="modal" data-target="#addEntityModal" onclick="load_form('/entity/add/{{ topic.id }}', '#form_add_entity')">

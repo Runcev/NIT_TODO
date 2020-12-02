@@ -101,13 +101,27 @@
                     });
                 }
 
-                function send_request (url) {
+                function open_modal_confirm (title, data, urlTarget, urlBack) {
+
+                    data = data + '<div class="modal-footer menu-buttons-container">' +
+                        '<button type="button" class="rounded-button" data-dismiss="modal">Close</button>' +
+                        '<button type="button" class="rounded-button" onclick="send_request(\''+urlTarget+'\', function (){location.href=\''+urlBack+'\';})">Confirm</button>' +
+                        '</div>';
+
+                    $('#modal_global_label').text(title);
+                    $('#div_modal_data').html(data);
+                    $('#modal_global').modal({keyboard: false});
+
+                }
+
+                // відправляємо запит, результат повертається в callback-функцію
+                function send_request (url, callback) {
                     $.ajax({
                         method: "GET",
                         url: url,
                         dataType: "json"
-                    }).done(function( data ) {
-                        return data;
+                    }).done(function(data) {
+                        callback(null, data);
                     });
                 }
 

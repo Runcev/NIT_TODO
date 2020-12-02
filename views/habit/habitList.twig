@@ -39,7 +39,7 @@
                         This month
                     </div>
                     <div class="habit-more-statistic col-3">
-                        <a href="{{ habit.url }}/edit">Edit</a>
+                        <a href="#" onclick="load_form('{{ habit.url }}/edit', '#div_modal_data', 'Edit habit'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
                     </div>
                 </div>
             {% else %}

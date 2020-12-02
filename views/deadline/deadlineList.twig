@@ -19,6 +19,9 @@
                 <td>
                     {{ deadline.name }}
                 </td>
+                <td width="20px">
+                    <a href="#" onclick="open_modal_confirm('Delete deadline','Do you want delete this deadline?', '/deadline/{{ deadline.id }}/delete', '/deadline'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times"></i></a>
+                </td>
             </tr>
         {% endfor %}
     </table>

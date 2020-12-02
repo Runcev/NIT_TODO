@@ -143,9 +143,13 @@ exports.eventUpdate = function (req, res) {
 
 exports.eventDelete = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    var eventId = req.params.id;
+
+    Event.findByIdAndDelete(eventId).exec(function (err, event) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.json({});
+    });
 };

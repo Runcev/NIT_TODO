@@ -150,9 +150,13 @@ exports.entityUpdate = function (req, res) {
 
 exports.entityDelete = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler - entity delete'});
-    }
+    var entityId = req.params.id;
+
+    Entity.findByIdAndDelete(entityId).exec(function (err, entity) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.json({});
+    });
 };

@@ -58,7 +58,8 @@
             {% for todo in todos %}
                 <div id="todo_{{ todo.id }}" style="margin-left: 10px">
                     <input type="checkbox" class="css-checkbox" {% if todo.isDone is same as(true) %}checked{% endif %} onclick="send_request('/todo/{{ todo.id }}/checked')"/>
-                    {{ todo.name }} <a href="#" onclick="send_request('/todo/{{ todo.id }}/delete'); $('#todo_{{ todo.id }}').hide();" data-toggle="tooltip" title="Delete"><i class="fas fa-times"></i></a>
+                    {{ todo.name }}
+                    <a href="#" onclick="open_modal_confirm('Delete todo','Do you want delete this todo?', '/todo/{{ todo.id }}/delete', '/'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times"></i></a>
                 </div>
             {% endfor %}
 
@@ -77,10 +78,11 @@
         $('input[habit_id]').click(function (){
             if ($(this).prop('checked') == true) {
                 // додаємо
-                send_request('/habit/'+$(this).attr('habit_id')+'/checked?num=1');
+                send_request('/habit/'+$(this).attr('habit_id')+'/checked?num=1', function (){location.href='/habit';});
+
             } else {
                 // віднімаємо
-                send_request('/habit/'+$(this).attr('habit_id')+'/checked?num=-1');
+                send_request('/habit/'+$(this).attr('habit_id')+'/checked?num=-1', function (){location.href='/habit';});
             }
         });
 

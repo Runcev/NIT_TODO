@@ -105,12 +105,20 @@ exports.habitChecked = function (req, res) {
         let counter = parseInt(habit.counter, 10) + parseInt(num, 10);
         let curDate = null;
 
+        // якщо зміниться місяць, обнулити лічильник
+        let curMonth = habit.curMonth;
+
         if (num == 1) {
             let date = new Date();
             curDate = date.getTime();
+
+            if (curMonth != date.getMonth()) {
+                curMonth = date.getMonth();
+                thisMonthCounter = 1;
+            }
         }
 
-        var habitChange = new Habit({curDate:curDate, thisMonthCounter: thisMonthCounter, counter: counter, _id: habitId});
+        var habitChange = new Habit({curDate:curDate, curMonth: curMonth, thisMonthCounter: thisMonthCounter, counter: counter, _id: habitId});
 
         Habit.findByIdAndUpdate(habitId, habitChange, {}, function(err, habitChange) {
             if (err) console.log(err);

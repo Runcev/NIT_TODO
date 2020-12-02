@@ -125,9 +125,13 @@ exports.topicUpdate = function (req, res) {
 
 exports.topicDelete = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    var topicId = req.params.id;
+
+    Topic.findByIdAndDelete(topicId).exec(function (err, topic) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.json({});
+    });
 };

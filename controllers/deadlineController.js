@@ -120,9 +120,13 @@ exports.deadlineUpdate = function (req, res) {
 
 exports.deadlineDelete = function (req, res) {
 
-    if (req.baseUrl.match(/api/)) {
-        res.send('');
-    } else {
-        res.render('index', {title: 'Scheduler'});
-    }
+    var deadlineId = req.params.id;
+
+    Deadline.findByIdAndDelete(deadlineId).exec(function (err, deadline) {
+        if (err) {
+            if (err) console.log(err);
+        }
+
+        res.json({});
+    });
 };
