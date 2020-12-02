@@ -16,7 +16,9 @@ var HabitSchema = new Schema(
         thisMonthCounter: {type: Number},
         counter: {type: Number},
         // виконувалась сьогодні чи ні
-        curDate: { type: Date},
+        curDate: {type: Date},
+        // якщо місяць зміниться, лічильник thisMonthCounter обнулимо
+        curMonth: {type: Number},
     }
 );
 
