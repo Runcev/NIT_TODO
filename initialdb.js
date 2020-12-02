@@ -90,10 +90,10 @@ function createDeadlines(cb) {
                 deadlineCreate('Lab4', '2020-12-06T23:00', entities[1], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab5', '2020-12-02T16:00', entities[2], users[0], callback);
+                deadlineCreate('Lab5', '2020-12-01T16:00', entities[2], users[0], callback);
             },
             function (callback) {
-                deadlineCreate('Lab6', '2020-12-02T17:00', entities[2], users[0], callback);
+                deadlineCreate('Lab6', '2020-12-03T17:00', entities[2], users[0], callback);
             },
             function (callback) {
                 deadlineCreate('Lab7', '2020-12-09T23:00', entities[3], users[0], callback);
@@ -242,13 +242,13 @@ function createEvents(cb) {
                 eventCreate('Lection', '2020-11-30T16:30', '2020-11-30T17:50', entities[1], users[0], 'online', 'comment', callback);
             },
             function (callback) {
-                eventCreate('Lection', '2020-12-01T08:30', '2020-12-01T09:50', entities[2], users[0], 'online', 'comment', callback);
+                eventCreate('Lection', '2020-12-03T08:30', '2020-12-03T09:50', entities[2], users[0], 'online', 'comment', callback);
             },
             function (callback) {
-                eventCreate('Practice', '2020-12-01T11:40', '2020-12-01T13:30', entities[2], users[0], 'online', 'comment', callback);
+                eventCreate('Practice', '2020-12-03T11:40', '2020-12-03T13:30', entities[2], users[0], 'online', 'comment', callback);
             },
             function (callback) {
-                eventCreate('Practice', '2020-12-01T15:00', '2020-12-01T16:20', entities[3], users[0], 'online', 'comment', callback);
+                eventCreate('Practice', '2020-12-03T15:00', '2020-12-03T16:20', entities[3], users[0], 'online', 'comment', callback);
             },
             function (callback) {
                 eventCreate('Lection', '2020-12-04T16:30', '2020-12-04T17:50', entities[3], users[0], 'online', 'comment', callback);
@@ -266,10 +266,10 @@ function createEvents(cb) {
                 eventCreate('Training', '2020-12-08T19:00', '2020-12-08T20:30', entities[10], users[0], 'Cort', 'comment', callback);
             },
             function (callback) {
-                eventCreate('Training', '2020-12-03T08:00', '2020-12-03T09:30', entities[9], users[0], 'Pool', 'comment', callback);
+                eventCreate('Training', '2020-12-04T08:00', '2020-12-04T09:30', entities[9], users[0], 'Pool', 'comment', callback);
             },
             function (callback) {
-                eventCreate("Birthday", '2020-12-01T22:00', '2020-12-01T23:30', entities[12], users[0], 'Club', 'comment', callback);
+                eventCreate("Birthday", '2020-12-03T22:00', '2020-12-03T23:30', entities[12], users[0], 'Club', 'comment', callback);
             },
         ],
         // optional callback
@@ -306,10 +306,10 @@ function createHabits(cb) {
 
     async.series([
             function (callback) {
-                habitCreate('Meditation', users[0], true, 15, 3, 45, callback);
+                habitCreate('Meditation', users[0], true, 15, 0, 21, callback);
             },
             function (callback) {
-                habitCreate('Reading', users[0], true, 10, 7, 20, callback);
+                habitCreate('Reading', users[0], true, 10, 0, 10, callback);
             },
         ],
         // optional callback
