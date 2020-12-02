@@ -90,21 +90,28 @@ var userId = function (req, res, next) {
 
             var User = require('./models/userModel');
 
-            var user = new User({name: name, email: email, password: md5(password)});
-
-            user.save(function (err) {
-                if (err) {
-                    if (req.baseUrl.match(/api/)) {
-                        res.send('User not added');
-                    } else {
-                        res.redirect('/');
-                    }
+            User.findOne({email: email}).exec(function (err, user) {
+                // такий юзер існує
+                if (user) {
+                    res.render('user/userAdd', {title: 'Registration', error: true});
                 } else {
-                    if (req.baseUrl.match(/api/)) {
-                        res.send('User added: ' + req.body.name + '/' + req.body.email);
-                    } else {
-                        res.redirect('/');
-                    }
+                    var user = new User({name: name, email: email, password: md5(password)});
+
+                    user.save(function (err) {
+                        if (err) {
+                            if (req.baseUrl.match(/api/)) {
+                                res.send('User not added');
+                            } else {
+                                res.redirect('/');
+                            }
+                        } else {
+                            if (req.baseUrl.match(/api/)) {
+                                res.send('User added: ' + req.body.name + '/' + req.body.email);
+                            } else {
+                                res.redirect('/');
+                            }
+                        }
+                    });
                 }
             });
 
