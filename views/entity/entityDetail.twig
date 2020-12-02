@@ -6,7 +6,7 @@
         <h3 class="name-entity-detail-frame" style="color: {{ entity.color.name }}">{{ entity.name }}
 
             {% if events is empty and deadlines is empty %}
-                <a id="del_entity" href="#" onclick="open_modal_confirm('Delete entity','Do you want delete this entity?', '/entity/{{ entity.id }}/delete', '/entity');" data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ entity.color.name }}"></i></a>
+                <a id="del_entity" href="#" onclick="open_modal_confirm('Delete entity','Do you want to delete this entity?', '/entity/{{ entity.id }}/delete', '/entity');" data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ entity.color.name }}"></i></a>
             {% endif %}
 
         </h3>
@@ -20,7 +20,7 @@
                 <div class="events-in-list-style">
                     <a href="#" onclick="load_form('/event/{{ event.id }}/edit?backUrl=entity/{{ entity.id }}', '#div_modal_data', 'Edit event'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ entity.color.name }}"></i></a>
                     {{ event.timeStart|date('d.m.Y') }} {{ event.timeStart|date('H:i') }}-{{ event.timeEnd|date('H:i') }} {{ event.name }} {% if event.place != '' %}/ {{ event.place }}{% endif %} {% if event.about != '' %}/ {{ event.about }}{% endif %}
-                    <a href="#" onclick="open_modal_confirm('Delete event','Do you want delete this event?', '/event/{{ event.id }}/delete', '/entity/{{ entity.id }}'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ entity.color.name }}"></i></a>
+                    <a href="#" onclick="open_modal_confirm('Delete event','Do you want to delete this event?', '/event/{{ event.id }}/delete', '/entity/{{ entity.id }}'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ entity.color.name }}"></i></a>
                 </div>
             {% endfor %}
             <!-- <a class = "events-in-list-style-a" href="/event/add/{{ entity.id }}" style="color: {{ entity.color.name }}">+ Add event</a> -->
@@ -36,7 +36,7 @@
                 <div class="events-in-list-style">
                     <a href="#" onclick="load_form('/deadline/{{ deadline.id }}/edit?backUrl=entity/{{ entity.id }}', '#div_modal_data', 'Edit deadline'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ entity.color.name }}"></i></a>
                     {{ deadline.date|date('d.m.Y') }} {{ deadline.date|date('H:i') }} {{ deadline.name }}
-                    <a href="#" onclick="open_modal_confirm('Delete deadline','Do you want delete this deadline?', '/deadline/{{ deadline.id }}/delete', '/entity/{{ entity.id }}'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ entity.color.name }}"></i></a>
+                    <a href="#" onclick="open_modal_confirm('Delete deadline','Do you want to delete this deadline?', '/deadline/{{ deadline.id }}/delete', '/entity/{{ entity.id }}'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ entity.color.name }}"></i></a>
                 </div>
             {% endfor %}
             <button class="add-new-eventOrdeadline-style events-in-list-style " style="color: {{ entity.color.name }}" data-toggle="modal" data-target="#addDeadlineModal"

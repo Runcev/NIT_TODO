@@ -3,7 +3,7 @@
 {% block body %}
 
     {% for topic in topics %}
-        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="#" onclick="load_form('{{ topic.url }}/edit', '#div_modal_data', 'Edit topic'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a> <a id="del_topic_{{ topic.id }}" style="display: none" href="#" onclick="open_modal_confirm('Delete topic','Do you want delete this topic?', '/topic/{{ topic.id }}/delete', '/entity');" data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ topic.color.name }}"></i></a><br>
+        <h3 class="name-topic-header-style" style="color: {{ topic.color.name }}">{{ topic.name }}</h3> <a href="#" onclick="load_form('{{ topic.url }}/edit', '#div_modal_data', 'Edit topic'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit" style="color: {{ topic.color.name }}"></i></a> <a id="del_topic_{{ topic.id }}" style="display: none" href="#" onclick="open_modal_confirm('Delete topic','Do you want to delete this topic?', '/topic/{{ topic.id }}/delete', '/entity');" data-toggle="tooltip" title="Delete"><i class="fas fa-times" style="color: {{ topic.color.name }}"></i></a><br>
 
         <div class="entity-buttons-container">
         {% set noEntity = 1 %}
