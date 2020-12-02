@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/regular.css" integrity="sha384-hCIN6p9+1T+YkCd3wWjB5yufpReULIPQ21XA/ncf3oZ631q2HEhdC7JgKqbk//4+"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">      
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css" integrity="sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J"
           crossorigin="anonymous">
 
@@ -30,87 +32,115 @@
 </head>
 <body>
 
-<div class="container">
-    {% include 'menu.twig' %}
-</div>
+    <div class="page-wrapper">
 
-<div id="modal_global" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal_global_label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal_global_label"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="container">
+            {% include 'menu.twig' %}
+        </div>
+
+        <div id="modal_global" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal_global_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal_global_label"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="div_modal_data">
+                        {# ajax #}
+                    </div>
+                </div>
             </div>
-            <div class="modal-body" id="div_modal_data">
-                {# ajax #}
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+                <div class="col-3">
+                    {% include 'right_block.twig' %}
+                </div>
             </div>
         </div>
+
+        {% block javascripts %}
+            <script>
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+                })
+            </script>
+            <script>
+
+                if (window.location.href.match(/habit/)) {
+                    document.getElementById("habitsButton").classList.add('menu-active-button');
+                } else if (window.location.href.match(/entity/) || window.location.href.match(/topic/)) {
+                    document.getElementById("entitiesButton").classList.add('menu-active-button');
+                } else if (window.location.href.match(/deadline/)) {
+                    document.getElementById("deadlinesButton").classList.add('menu-active-button');
+                } else if (window.location.href.match(/profile/)) {
+                    document.getElementById("profileButton").classList.add('menu-active-button');
+                } else {
+                    document.getElementById("calendarButton").classList.add('menu-active-button');
+                }
+
+                function load_form (url, target, title) {
+
+                    if (title != undefined) {
+                        $('#modal_global_label').text(title);
+                    }
+
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        dataType: "html"
+                    }).done(function( data ) {
+                        $(target).html(data);
+                    });
+                }
+
+                function send_request (url) {
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        dataType: "json"
+                    }).done(function( data ) {
+                        return data;
+                    });
+                }
+
+            </script>
+            
+            
+        {% endblock %}
     </div>
-</div>
+   
 
-<div class="container">
-    <div class="row">
-        <div class="col-9">
-            {% block body %}
-            {% endblock %}
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h1 class="logo-text"><span>Team</span>Todo<h1>
+                <!--<p>This our awesome site</p>-->
+                <div class="contact">
+                    <span><i class="fas fa-phone"></i> &nbsp; 123-456-789</span>
+                    <span><i class="fas fa-envelope"></i> &nbsp; info@teamtodo.com</span>
+                </div>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>    
+                    <a href="#"><i class="fab fa-telegram"></i></a>    
+                </div>
+            </div>
+
         </div>
-        <div class="col-3">
-            {% include 'right_block.twig' %}
+
+        <div class="footer-bottom">
+            &copy;  Designed by NIT Team
         </div>
-    </div>
-</div>
+    <div>
 
-{% block javascripts %}
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        })
-    </script>
-    <script>
-
-        if (window.location.href.match(/habit/)) {
-            document.getElementById("habitsButton").classList.add('menu-active-button');
-        } else if (window.location.href.match(/entity/) || window.location.href.match(/topic/)) {
-            document.getElementById("entitiesButton").classList.add('menu-active-button');
-        } else if (window.location.href.match(/deadline/)) {
-            document.getElementById("deadlinesButton").classList.add('menu-active-button');
-        } else if (window.location.href.match(/profile/)) {
-            document.getElementById("profileButton").classList.add('menu-active-button');
-        } else {
-            document.getElementById("calendarButton").classList.add('menu-active-button');
-        }
-
-        function load_form (url, target, title) {
-
-            if (title != undefined) {
-                $('#modal_global_label').text(title);
-            }
-
-            $.ajax({
-                method: "GET",
-                url: url,
-                dataType: "html"
-            }).done(function( data ) {
-                $(target).html(data);
-            });
-        }
-
-        function send_request (url) {
-            $.ajax({
-                method: "GET",
-                url: url,
-                dataType: "json"
-            }).done(function( data ) {
-                return data;
-            });
-        }
-
-	</script>
-	
-	
-{% endblock %}
 
 </body>
 </html>
