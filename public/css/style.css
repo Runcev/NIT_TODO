@@ -158,10 +158,6 @@ html, body{
     text-align: center;
 }
 
-.edit-box .textbox::after {
-    content: "rr";
-}
-
 .login-box,
 .register-box,
 .edit-box h1{
