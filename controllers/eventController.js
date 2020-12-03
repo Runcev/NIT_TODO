@@ -70,15 +70,82 @@ exports.eventAdd = function (req, res) {
     let about = req.body.about;
     let backUrl = req.query.backUrl??'';
 
+    let repeatDay = parseInt((req.body.repeatDay == '')?0:req.body.repeatDay, 10);
+    let repeatWeek = parseInt((req.body.repeatWeek == '')?0:req.body.repeatWeek, 10);
+    let repeatMonth = parseInt((req.body.repeatMonth == '')?0:req.body.repeatMonth, 10);
+
     // юзер у нас завжди доступний після авторизації
     let user = req.currentUser;
 
-    var event = new Event({name: name, user: user._id, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+    if (repeatDay != 0) {
 
-    event.save(function (err) {
+        // повторюємо івент на задану кількість днів
+        while (repeatDay >= 0) {
 
-        if (err) console.log(err);
-    });
+            let event = new Event({name: name, user: user._id, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+
+            event.save(function (err) {
+                if (err) console.log(err);
+            });
+
+            let dateTimeStart = new Date(timeStart);
+            let dateTimeEnd = new Date(timeEnd);
+
+            timeStart = dateTimeStart.setDate(dateTimeStart.getDate()+1);
+            timeEnd = dateTimeEnd.setDate(dateTimeEnd.getDate()+1);
+
+            repeatDay--;
+        }
+
+    } else if (repeatWeek != 0) {
+
+        // повторюємо івент (точно в якийсь день тижня) на задану кількість тижнів
+        while (repeatWeek >= 0) {
+
+            let event = new Event({name: name, user: user._id, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+
+            event.save(function (err) {
+                if (err) console.log(err);
+            });
+
+            let dateTimeStart = new Date(timeStart);
+            let dateTimeEnd = new Date(timeEnd);
+
+            timeStart = dateTimeStart.setDate(dateTimeStart.getDate()+7);
+            timeEnd = dateTimeEnd.setDate(dateTimeEnd.getDate()+7);
+
+            repeatWeek--;
+        }
+
+    } else if (repeatMonth != 0) {
+
+        // повторюємо івент на задану кількість місяців в точну дату
+        // тобто, якщо задано івент на 03/12/2020 і повторити 2 місяці, то додасть 03/01/2021 та 03/02/2021
+        while (repeatMonth >= 0) {
+
+            let event = new Event({name: name, user: user._id, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+
+            event.save(function (err) {
+                if (err) console.log(err);
+            });
+
+            let dateTimeStart = new Date(timeStart);
+            let dateTimeEnd = new Date(timeEnd);
+
+            timeStart = dateTimeStart.setMonth(dateTimeStart.getMonth()+1);
+            timeEnd = dateTimeEnd.setMonth(dateTimeEnd.getMonth()+1);
+
+            repeatMonth--;
+        }
+
+    } else {
+
+        let event = new Event({name: name, user: user._id, timeStart: timeStart, timeEnd: timeEnd, entity: entity, place: place, about: about});
+
+        event.save(function (err) {
+            if (err) console.log(err);
+        });
+    }
 
     if (req.baseUrl.match(/api/)) {
         res.send('');
