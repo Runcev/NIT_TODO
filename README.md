@@ -8,7 +8,6 @@
 
 Завантажуємо проект та встановлюємо.
 #### `npm install`
-#### `cd client & npm install`
 
 Створити папку для нашої БД: `C:\mongodb\db`
 
@@ -29,24 +28,10 @@
 Стартуємо сервер Node.js
 #### `npm run server`
 
-Стартуємо ReactApp
-#### `npm run client`
-
 ## Доступ до сайту
-
-На сервері буде REST API для ReactApp. І також на сервері буде версія сайту на html. 
 
 Сервер/веб-сайт: [http://localhost:5000](http://localhost:5000)
 
-Веб-сайт на ReactApp: [http://localhost:3000](http://localhost:3000)
-
-## React
-
-Все що ми будемо створювати на React, розміщуємо в каталозі `src_react`, тобто всі компоненти, стилі до них і т.д. 
-
-Потім, щоб побачити зміни на сайті, компілюємо все це в терміналі
-
-`npm run build`
 
 ## REST API
 
