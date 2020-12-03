@@ -26,9 +26,11 @@
         Deadlines
     </button>
 
-    <button type="button" id="profileButton" class="rounded-button"  onclick="location.href='/user/profile'">
-        Profile
-    </button>
+    {% if userLogin ==1 %}
+        <button type="button" id="profileButton" class="rounded-button"  onclick="location.href='/user/profile'">
+            Profile
+        </button>
+    {% endif %}
 
     {% if userLogin ==1 %}
         <button type="button" id="logoutButton"
