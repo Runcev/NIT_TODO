@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label>This month target</label>
-            <input type="text" name="thisMonthTargetCount" value="{{ habit.thisMonthTargetCount }}" class="form-control">
+            <input type="number" min="1" max="31" name="thisMonthTargetCount" value="{{ habit.thisMonthTargetCount }}" class="form-control">
         </div>
 
         Is actual? <input type="checkbox" name="isActual" value="1" {% if habit.isActual is same as (true) %}checked{% endif %} class="form-control" style="width: auto;">

@@ -18,6 +18,25 @@
         </div>
 
         <div class="form-group">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <label>Repeat days</label>
+                        <input id="repeatDay" type="number" min="1" max="30" name="repeatDay" class="form-control">
+                    </td>
+                    <td>
+                        <label>or weeks</label>
+                        <input id="repeatWeek" type="number" min="1" max="48" name="repeatWeek" class="form-control">
+                    </td>
+                    <td>
+                        <label style="white-space: nowrap">or months (in exact date)</label>
+                        <input id="repeatMonth" type="number" min="1" max="12" name="repeatMonth" class="form-control">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group">
             <label>Entity</label>
             <select name="entity" class="form-control" required>
                 {% for entity in entities %}
@@ -40,3 +59,21 @@
             <button type="submit" class="rounded-button">Save</button>
         </div>
     </form>
+
+    <script>
+        $('#repeatDay').change(function () {
+            $('#repeatMonth').val('');
+            $('#repeatWeek').val('');
+        });
+
+        $('#repeatWeek').change(function () {
+            $('#repeatMonth').val('');
+            $('#repeatDay').val('');
+        });
+
+        $('#repeatMonth').change(function () {
+            $('#repeatDay').val('');
+            $('#repeatWeek').val('');
+        });
+
+    </script>
