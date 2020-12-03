@@ -427,7 +427,7 @@ Entity list style
     font-size: 100%;
     padding: 5px 10px;
     background-color: #7cbb5d;
-    font-weight: 900;
+    font-weight: 700;
     border-radius: 15px;
     color :white;
 }
@@ -479,6 +479,10 @@ Entity list style
 .margin-progress-bar  {
     margin-top: 32px;
 }
-.custom-checkbox {
-
+.green-a{
+    color: #7cbb5d;
+    transition: color 0.4s linear;
+}
+.green-a:hover{
+    color: #4a832d;
 }
