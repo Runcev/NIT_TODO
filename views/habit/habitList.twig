@@ -64,7 +64,7 @@
                 </div>
                 <div class="under-info-container row">
                     <div class="col-3">
-                        All the time
+                        During all the time
                     </div>
                     <div class="col-4">
                         This month
@@ -76,8 +76,15 @@
             {% endif %}
 
         {% endfor %}
+        <div class="habit-container row non-actual">
+            <div class="habit-line col-12">
+            </div>
+
+            <button style="margin: auto; margin-top:25px;" type="button" class="add-new-topic-style" data-toggle="modal" data-target="#addTopicModal" onclick="load_form('/habit/add', '#div_modal_data', 'Add habit'); $('#modal_global').modal({keyboard: false});">
+                <h2> Create new Habit + </h2>
+            </button>
+        </div>
     </div>
 
 {% endblock %}
-
 
