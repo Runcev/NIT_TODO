@@ -2,47 +2,49 @@
 
 {% block body %}
 
+    <div class="login-box">
+        <h1>Login</h1>
+
         <form action="/user/login" method="post" class="box">
-            <div class="login-box">
-                <h1>Login</h1>
-                <div class="textbox">
+
+            <div class="textbox">
                 <i class="fas fa-envelope"></i>
-                    <input 
-                        type="email" 
+                <input
+                        type="email"
                         name="email"
-                        placeHolder= "Email"
+                        placeHolder="Email"
                         aria-describedby="emailHelp" required>
-                </div>
+            </div>
 
-                <div class="textbox">
+            <div class="textbox">
                 <i class="fas fa-lock"></i>
-                    <input
-                        type="password" 
-                        name="password" 
-                        placeHolder="Password" 
+                <input
+                        type="password"
+                        name="password"
+                        placeHolder="Password"
                         class="" required>
-                </div>
+            </div>
 
-                <div class="menu-buttons-container">
-                    <button style="margin-top: 10px;"
+            <div class="menu-buttons-container">
+                <button style="margin-top: 10px;"
                         type="submit"
                         class="rounded-button">Login
-                    </button>
-                </div>
-
-                <div class="menu-buttons-container">
-                    <button
-                         class="rounded-button" 
-                         onClick="location.href='/user/add'">Register
-                    </button>
-                </div>
-
-                <div style="margin-bottom: 20px; height: 30px; font-size: 18px">
-                    {% if error is same as (true) %}
-                        Email or password is wrong.
-                    {% endif %}
-                </div>
+                </button>
             </div>
         </form>
+
+        <div class="menu-buttons-container">
+            <button
+                    class="rounded-button"
+                    onClick="location.href='/user/add'">Register
+            </button>
+        </div>
+
+        <div style="margin-bottom: 20px; height: 30px; font-size: 18px">
+            {% if error is same as (true) %}
+                Email or password is wrong.
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
