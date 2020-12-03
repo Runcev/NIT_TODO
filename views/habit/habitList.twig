@@ -53,7 +53,7 @@
                     <div class="habit-big-num col-3">
                         {{ habit.counter }}
                     </div>
-                    <div class="habit-progress-bar col-4">
+                    <div class="habit-progress-bar col-4 non-actual">
                         <div class="progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
                             <div class="progress__number">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}%</div>
                         </div>
