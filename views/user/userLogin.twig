@@ -37,11 +37,12 @@
                     </button>
                 </div>
 
-
-                {% if error is same as (true) %}
-                    <br><br>Email or password is wrong.
-                {% endif %}
-            </div>    
+                <div style="margin-bottom: 20px; height: 30px; font-size: 18px">
+                    {% if error is same as (true) %}
+                        Email or password is wrong.
+                    {% endif %}
+                </div>
+            </div>
         </form>
 
 {% endblock %}

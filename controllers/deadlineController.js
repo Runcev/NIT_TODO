@@ -76,20 +76,19 @@ exports.deadlineEdit = function (req, res) {
 
     let deadlineId = req.params.id;
     let backUrl = req.query.backUrl??'';
+    let user = req.currentUser;
 
-    Deadline.findById(deadlineId).exec(function (err, deadline) {
+    Deadline.find({user: user._id, _id: deadlineId}).exec(function (err, deadline) {
         if (err) {
             if (err) console.log(err);
         }
-
-        let user = req.currentUser;
 
         // список всіх сутностей авторизованого юзера
         Entity.find({user: user._id}).populate('topic')
             .exec(function (err, entities) {
                 if (err) console.log(err);
 
-                res.render('deadline/deadlineEdit', {title: 'Edit deadline', deadline: deadline, entities: entities, backUrl: backUrl});
+                res.render('deadline/deadlineEdit', {title: 'Edit deadline', deadline: deadline[0], entities: entities, backUrl: backUrl});
             });
     });
 };

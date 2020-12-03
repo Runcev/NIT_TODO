@@ -40,9 +40,11 @@
                 </button>
             </div>
 
-            {% if error is same as (true) %}
-                <br><br>This email is already in use.
-            {% endif %}
+            <div style="margin-bottom: 20px; height: 30px; font-size: 18px">
+                {% if error is same as (true) %}
+                    This email is already in use.
+                {% endif %}
+            </div>
 
         </div>
     </form>

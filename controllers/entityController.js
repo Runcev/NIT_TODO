@@ -39,7 +39,7 @@ exports.entityDetail = function (req, res) {
             if (err) console.log(err);
 
             if (entity.length == 0) {
-                res.send('Page not found. <a href="/">Go home</a>');
+                res.render('error', {message: 'Page not found'});
             } else {
                 Event.find({user: user._id, entity: entity[0]._id}).sort('timeStart')
                     .exec(function (err, events) {
@@ -106,26 +106,35 @@ exports.entityAdd = function (req, res) {
 exports.entityEdit = function (req, res) {
 
     let entityId = req.params.id;
+    let user = req.currentUser;
 
-    Entity.findById(entityId).exec(function (err, entity) {
-        if (err) {
-            if (err) console.log(err);
-        }
+    // захист від хаку, щоб ніхто не міг модифікувати чужі записи
+    Entity.find({user: user._id, _id: entityId}).exec(function (err, entity) {
+        if (err) console.log(err);
+        if (entity.length == 0) {
+            res.render('error', {message: 'Page not found'});
+        } else {
+            Entity.findById(entityId).exec(function (err, entity) {
+                if (err) {
+                    if (err) console.log(err);
+                }
 
-        let user = req.currentUser;
+                let user = req.currentUser;
 
-        // список всіх topics авторизованого юзера
-        Topic.find({user: user._id})
-            .exec(function (err, topics) {
-                if (err) console.log(err);
-
-                Color.find({})
-                    .exec(function (err, colors) {
+                // список всіх topics авторизованого юзера
+                Topic.find({user: user._id})
+                    .exec(function (err, topics) {
                         if (err) console.log(err);
 
-                        res.render('entity/entityEdit', {title: 'Edit entity', entity: entity, topics: topics, colors: colors});
+                        Color.find({})
+                            .exec(function (err, colors) {
+                                if (err) console.log(err);
+
+                                res.render('entity/entityEdit', {title: 'Edit entity', entity: entity, topics: topics, colors: colors});
+                            });
                     });
             });
+        }
     });
 };
 
@@ -134,16 +143,27 @@ exports.entityUpdate = function (req, res) {
     let name = req.body.name;
     let topic = req.body.topic;
     let color = req.body.color;
+    let entityId = req.params.id;
+    let user = req.currentUser;
 
-    var entity = new Entity({name: name, topic: topic, color: color, _id: req.params.id});
-
-    Entity.findByIdAndUpdate(req.params.id, entity, {}, function(err, entity){
-        if(err) console.log(err);
-
-        if (req.baseUrl.match(/api/)) {
-            res.send('');
+    // захист від хаку, щоб ніхто не міг модифікувати чужі записи
+    Entity.find({user: user._id, _id: entityId}).exec(function (err, entity) {
+        if (err) console.log(err);
+        if (entity.length == 0) {
+            res.render('error', {message: 'Page not found'});
         } else {
-            res.redirect('/entity/'+entity._id);
+
+            let entity = new Entity({name: name, topic: topic, color: color, _id: entityId});
+
+            Entity.findByIdAndUpdate(entityId, entity, {}, function(err, entity){
+                if(err) console.log(err);
+
+                if (req.baseUrl.match(/api/)) {
+                    res.send('');
+                } else {
+                    res.redirect('/entity/'+entity._id);
+                }
+            });
         }
     });
 };
@@ -151,12 +171,21 @@ exports.entityUpdate = function (req, res) {
 exports.entityDelete = function (req, res) {
 
     var entityId = req.params.id;
+    let user = req.currentUser;
 
-    Entity.findByIdAndDelete(entityId).exec(function (err, entity) {
-        if (err) {
+    // захист від хаку, щоб ніхто не міг видалити чужі записи
+    Entity.find({user: user._id, _id: entityId}).exec(function (err, entity) {
             if (err) console.log(err);
-        }
+            if (entity.length == 0) {
+                res.render('error', {message: 'Page not found'});
+            } else {
+                Entity.findByIdAndDelete(entityId).exec(function (err, entity) {
+                    if (err) {
+                        if (err) console.log(err);
+                    }
 
-        res.json({});
-    });
+                    res.json({});
+                });
+            }
+        });
 };
