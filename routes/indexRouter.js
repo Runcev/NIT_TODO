@@ -19,7 +19,7 @@ router.get('/right-block', function (req, res, next) {
 
     let user = req.currentUser;
 
-    Event.find({user: user._id}).populate({path: 'entity', populate: {path: 'topic'}})
+    Event.find({user: user._id}).populate({path: 'entity', populate: {path: 'topic'}}).sort('timeStart')
         .exec(function (err, events) {
             if (err) console.log(err);
 
