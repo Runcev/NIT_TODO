@@ -36,9 +36,24 @@
                  style="margin-top: 10px; text-align: center;">
                 <button type="submit" 
                         id="register-save"
-                        class="rounded-button">Save
+                        class="rounded-button">Create account
                 </button>
             </div>
+
+            
+        <div class="a-divider">
+            <h5>Already have an account?</h5>
+        </div>
+            
+            <div class="menu-buttons-container">
+             <button type="button" 
+                     style="width: 100%"
+                     id="backToLogin"
+                     class="rounded-button" 
+                     onclick="location.href='/user/logout'">
+                     Back to Login
+                    </button>
+            <div>
 
             <div style="margin-bottom: 20px; height: 30px; font-size: 18px">
                 {% if error is same as (true) %}
