@@ -68,6 +68,7 @@ var userId = function (req, res, next) {
     // юзер авторизований
     if (req.session.currentUser) {
         req.currentUser = req.session.currentUser;
+        res.locals.userLogin = 1;
         next();
 
         // переадресовуємо на форму авторизації
