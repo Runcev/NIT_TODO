@@ -18,28 +18,28 @@
                     <div class="habit-line col-12">
 
                     </div>
-                    <div class="habit-big-num col-3">
+                    <div class="habit-big-num col-4 habit-child-block">
                         {{ habit.counter }}
+                        <div class="habit-undertext-div">
+                            <span>
+                                All the time
+                            </span>
+                        </div>
                     </div>
-                    <div class="habit-progress-bar col-4">
-                        <div class="progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
+                    <div class="habit-progress-bar col-4 habit-child-block">
+                        <div class="margin-progress-bar  progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
                             <div class="progress__number">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}%</div>
                         </div>
-
+                        <div class="habit-undertext-div">
+                            <span>
+                                This month
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-3">
-
-                    </div>
-                </div>
-                <div class="under-info-container row">
-                    <div class="col-3">
-                        During all the time
-                    </div>
-                    <div class="col-4">
-                        This month
-                    </div>
-                    <div class="habit-more-statistic col-3">
-                        <a href="#" onclick="load_form('{{ habit.url }}/edit', '#div_modal_data', 'Edit habit'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                    <div class="col-4 habit-child-block">
+                        <div class="habit-more-statistic col-3 edit-habit-button">
+                            <a href="#" onclick="load_form('{{ habit.url }}/edit', '#div_modal_data', 'Edit habit'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                        </div>
                     </div>
                 </div>
             {% else %}
@@ -50,27 +50,28 @@
                     <div class="habit-line col-12">
 
                     </div>
-                    <div class="habit-big-num col-3">
+                    <div class="habit-big-num col-4 habit-child-block">
                         {{ habit.counter }}
-                    </div>
-                    <div class="habit-progress-bar col-4 non-actual">
-                        <div class="progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
-                            <div class="progress__number">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}%</div>
+                        <div class="habit-undertext-div">
+                            <span>
+                                All the time
+                            </span>
                         </div>
                     </div>
-                    <div class="col-3">
-
+                    <div class="habit-progress-bar col-4 habit-child-block non-actual">
+                        <div class="margin-progress-bar progress--circle progress--{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round }}">
+                            <div class="progress__number">{{ (habit.thisMonthCounter/habit.thisMonthTargetCount*100)|round(1, 'floor') }}%</div>
+                        </div>
+                        <div class="habit-undertext-div">
+                            <span>
+                                This month
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="under-info-container row">
-                    <div class="col-3">
-                        During all the time
-                    </div>
-                    <div class="col-4">
-                        This month
-                    </div>
-                    <div class="habit-more-statistic col-3">
-                        <a href="#" onclick="load_form('{{ habit.url }}/edit', '#div_modal_data', 'Edit habit'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                    <div class="col-4 habit-child-block">
+                        <div class="habit-more-statistic col-3 edit-habit-button">
+                            <a href="#" onclick="load_form('{{ habit.url }}/edit', '#div_modal_data', 'Edit habit'); $('#modal_global').modal({keyboard: false});" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                        </div>
                     </div>
                 </div>
             {% endif %}

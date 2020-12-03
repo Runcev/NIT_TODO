@@ -455,3 +455,21 @@ Entity list style
 .add-new-eventOrdeadline-style :focus{
     outline: 0;
 }
+
+.habit-child-block {
+    position: relative;
+    padding-bottom: 30px;
+}
+.habit-undertext-div {
+    font-size: 1rem;
+    position: absolute;
+    bottom: 10px;
+}
+.edit-habit-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.margin-progress-bar  {
+    margin-top: 32px;
+}
