@@ -43,7 +43,7 @@
 
             {% for habit in habits %}
                 {% if habit.isActual is same as(true) %}
-                    <div style="margin-left: 10px"><input habit_id="{{ habit.id }}" {% if habit.curDate != null and habit.curDate|date('d.m.Y') == date()|date('d.m.Y') %}checked{% endif %} type="checkbox"> {{habit.name}}</div>
+                    <div style="margin-left: 10px"><input  class="custom-checkbox" habit_id="{{ habit.id }}" {% if habit.curDate != null and habit.curDate|date('d.m.Y') == date()|date('d.m.Y') %}checked{% endif %} type="checkbox"> {{habit.name}}</div>
                 {% endif %}
             {% endfor %}
 
@@ -57,7 +57,7 @@
             <summary class="style-for-today-detail-list"> To do ✅</summary>
             {% for todo in todos %}
                 <div id="todo_{{ todo.id }}" style="margin-left: 10px">
-                    <input type="checkbox" class="css-checkbox" {% if todo.isDone is same as(true) %}checked{% endif %} onclick="send_request('/todo/{{ todo.id }}/checked')"/>
+                    <input class="custom-checkbox" type="checkbox" class="css-checkbox" {% if todo.isDone is same as(true) %}checked{% endif %} onclick="send_request('/todo/{{ todo.id }}/checked')"/>
                     {{ todo.name }}
                     <a href="#" onclick="open_modal_confirm('Delete todo','Do you want to delete this todo?', '/todo/{{ todo.id }}/delete', '/'); " data-toggle="tooltip" title="Delete"><i class="fas fa-times"></i></a>
                 </div>

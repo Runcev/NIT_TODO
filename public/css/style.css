@@ -1,15 +1,21 @@
 /*
   основний файл зі стилями
 */
+
+/*
 .modal-body {
     padding-bottom: 0px;
 }
 .modal-content {
     border: 2px solid #7cbb5d !important;
-    box-shadow: 0px 0px 5vw #558140;
+    box-shadow: 0px 0px 5vw rgba(98, 210, 42, 0.19);
 }
 .modal {
-    box-shadow: inset 0px 40vw 30vw #55814099;
+    box-shadow: inset 0px 40vw 30vw rgba(98, 210, 42, 0.29);
+}
+*/
+.modal-content {
+    border: 2px solid #7cbb5d !important;
 }
 .form-group input {
     transition: background-color 0.4s linear;
@@ -136,7 +142,7 @@ html, body {
 .socials a {
     border: 1px solid gray;
     width: 45px;
-    height: 40 px;
+    height: 40px;
     padding-top: 2px;
     padding-bottom: 2px;
     margin-right: 5px;
@@ -472,4 +478,7 @@ Entity list style
 }
 .margin-progress-bar  {
     margin-top: 32px;
+}
+.custom-checkbox {
+
 }
